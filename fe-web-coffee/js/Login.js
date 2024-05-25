@@ -1,18 +1,18 @@
 
 
 let state = {
-    username: '',
+    sdt: '',
     password: '',
     errMessage: '',
     isShowPassword: false
 };
 
-document.getElementById('username').addEventListener('input', handleOnChangeUsername);
+document.getElementById('sdt').addEventListener('input', handleOnChangeSDT);
 document.getElementById('password').addEventListener('input', handleOnChangePassword);
 document.getElementById('loginForm').addEventListener('submit', handleLogIn);
 
-function handleOnChangeUsername(event) {
-    state.username = event.target.value;
+function handleOnChangeSDT(event) {
+    state.sdt = event.target.value;
 }
 
 function handleOnChangePassword(event) {
@@ -24,7 +24,7 @@ async function handleLogIn(event) {
     state.errMessage = '';
     try {
         let response = await axios.post('http://localhost:8080/api/login', {
-            sdt: state.username,
+            sdt: state.sdt,
             password: state.password
         });
         let data = response.data;
@@ -36,7 +36,7 @@ async function handleLogIn(event) {
             // Xử lý đăng nhập thành công (ví dụ: chuyển hướng đến trang khác)
             document.getElementById('loginResult').textContent = 'Login successful!';
             // Chuyển hướng đến trang sign-up.html
-            window.location.href = 'sign-up.html';
+            window.location.href = 'index-logined.html';
         }
     } catch (error) {
         if (error.response && error.response.data) {

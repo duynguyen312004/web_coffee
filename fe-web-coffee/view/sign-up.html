@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/SignUp.js" defer></script>
     <script src="../assets/js/scripts.js"></script>
 </head>
 
@@ -35,10 +37,10 @@
                 <p class="auth__desc">
                     Hãy đăng ký trở thành thành viên của The Coffee House
                 </p>
-                <form action="" class="form auth__form">
+                <form action="" id="signUpForm" class="form auth__form">
                     <div class="form__text-input">
-                        <input type="number" name="" id="" placeholder="Số điện thoại" class="form__input" required
-                            minlength="10" />
+                        <input type="text" name="" id="sdt" placeholder="Số điện thoại" class="form__input" required
+                            minlength="10" autocomplete="sdt" />
                         <img src="" alt="" class="form__input-icon" />
                     </div>
                     <p class="form__error">
@@ -46,19 +48,34 @@
                     </p>
                     <div class="form__group">
                         <div class="form__text-input">
-                            <input type="password" name="" id="" placeholder="Mật khẩu" class="form__input" required
-                                minlength="6" autocomplete="new-password" />
+                            <input type="password" name="" id="password" placeholder="Mật khẩu" class="form__input"
+                                required minlength="6" autocomplete="new-password" />
                             <img src="" alt="" class="form__input-icon" />
                         </div>
                         <p class="form__error">Mật khẩu ít nhất 6 ký tự</p>
                     </div>
                     <div class="form__group">
                         <div class="form__text-input">
-                            <input type="password" name="" id="" placeholder="Xác nhận mật khẩu" class="form__input"
-                                required autocomplete="new-password" />
+                            <input type="password" name="" id="re_password" placeholder="Xác nhận mật khẩu"
+                                class="form__input" required autocomplete="new-password" />
                             <img src="" alt="" class="form__input-icon" />
                         </div>
                         <p class="form__error">Mật khẩu ít nhất 6 ký tự</p>
+                    </div>
+                    <div class="form__group">
+                        <div class="form__text-input">
+                            <input type="text" name="name" id="name" placeholder="Tên" class="form__input" required />
+                            <img src="" alt="" class="form__input-icon" />
+                        </div>
+                        <p class="form__error">Tên không được để trống</p>
+                    </div>
+                    <div class="form__group">
+                        <div class="form__text-input">
+                            <input type="text" name="address" id="address" placeholder="Địa chỉ" class="form__input"
+                                required />
+                            <img src="" alt="" class="form__input-icon" />
+                        </div>
+                        <p class="form__error">Địa chỉ không được để trống</p>
                     </div>
                     <div class="form__group form__group--inline">
                         <label class="form__checkbox">
@@ -68,12 +85,8 @@
                         <a href="" class="auth__link">Khôi phục mật khẩu</a>
                     </div>
                     <div class="form__group auth__btn-group">
-                        <button class="btn btn--primary auth__btn form__submit-btn">
+                        <button type="submit" class="btn btn--primary auth__btn form__submit-btn">
                             Đăng ký
-                        </button>
-                        <button class="btn btn--outline auth__btn btn--no-margin">
-                            <img src="" alt="" class="btn__icon" />
-                            Đăng nhập với Gmail
                         </button>
                     </div>
                 </form>
@@ -82,7 +95,9 @@
                     Bạn đã có tài khoản?
                     <a href="./sign-in.html" class="auth__link">Đăng nhập</a>
                 </div>
+                <p style="color: red;" id="signUpResult"></p>
             </div>
+
         </div>
     </main>
 </body>
