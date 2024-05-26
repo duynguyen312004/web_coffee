@@ -1,6 +1,6 @@
 const pool = require('../config/database');
 
-const getAllCustomer = async () => {
+const getAllProduct = async () => {
     try {
         const res = await pool.query('SELECT * FROM product');
         return res.rows;
@@ -76,7 +76,7 @@ const handleUpdateCus = async (cusId, name, address) => {
 }
 
 module.exports = {
-    getAllCustomer,
+    getAllProduct,
     handleCustomerLogin,
     handleCusRegister,
     handleUpdateCus

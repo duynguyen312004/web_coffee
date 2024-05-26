@@ -1,9 +1,9 @@
 
-const { getAllCustomer, handleCustomerLogin, handleCusRegister, handleUpdateCus } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus } = require('../services/CRUDservices');
 
 const getHomePage = async (req, res) => {
-    let customers = await getAllCustomer();
-    return res.send(customers);
+    let products = await getAllProduct();
+    return res.json(products);
 }
 
 const handleLogin = async (req, res) => {

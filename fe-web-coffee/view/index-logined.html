@@ -1,199 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The Coffee House</title>
 
-        <!-- Favicon -->
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="./assets/favicon/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="./assets/favicon/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="./assets/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Coffee House</title>
 
-        <!-- Font -->
-        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="./assets/css/main.css" />
+    <!-- Font -->
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
 
-        <!-- Scripts -->
-        <script src="./assets/js/scripts.js"></script>
-    </head>
-    <body>
-        <!-- Header -->
-        <header id="header" class="header"></header>
-        <script>
-            load("#header", "./templates/header-logined.html");
-        </script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/main.css" />
 
-        <!-- Main -->
-        <div class="container home">
-            <section class="home__container">
-                <div class="slideshow">
-                    <div class="slideshow__inner">
-                        <a href="#!" class="slideshow__item">
-                            <img
-                                src="./assets/img/header-big-img.webp"
-                                alt=""
-                                class="slideshow__img"
-                            />
-                        </a>
-                    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/GetProducts.js" defer></script>
+    <script src="./assets/js/scripts.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "./templates/header-logined.html");
+    </script>
+
+    <!-- Main -->
+    <div class="container home">
+        <section class="home__container">
+            <div class="slideshow">
+                <div class="slideshow__inner">
+                    <a href="#!" class="slideshow__item">
+                        <img src="./assets/img/header-big-img.webp" alt="" class="slideshow__img" />
+                    </a>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="home__container">
-                <div class="row row-cols-4 row-cols-md-1">
-                    <!-- Catergory item 1 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img
-                                src="./assets/img/category-item-1.webp"
-                                alt=""
-                                class="cate-item__thumb"
-                            />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title">
-                                    CloudFee Hạnh Nhân Nướng
-                                </a>
-                                <p class="cate-item__desc">49.000 đ</p>
-                            </section>
-                        </article>
-                    </div>
+        <section class="home__container">
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm sẽ được render tại đây -->
+            </div>
 
-                    <!-- Catergory item 2 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img src="./assets/img/category-item-2.webp"" alt=""
-                            class="cate-item__thumb" />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title">
-                                    The Coffee House Sữa Đá
-                                </a>
-                                <p class="cate-item__desc">39.000 đ</p>
-                            </section>
-                        </article>
-                    </div>
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm sẽ được render tại đây -->
+            </div>
+        </section>
+    </div>
 
-                    <!-- Catergory item 3 -->
-                    <!-- <div class="col">
-                        <article class="cate-item">
-                            <img
-                                src="./assets/img/category-item-5.webp"
-                                alt=""
-                                class="cate-item__thumb"
-                            />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title">
-                                    Bánh Mì VN Thịt Nguội
-                                </a>
-                                <p class="cate-item__desc">39.000 đ</p>
-                            </section>
-                        </article>
-                    </div> -->
+    <!-- Footer -->
+    <footer id="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+</body>
 
-                    <!-- Catergory item 4 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img
-                                src="./assets/img/small-banner.jpg"
-                                alt=""
-                                class="cate-item__thumb small-banner"
-                            />
-                        </article>
-                    </div>
-                </div>
-
-                <div class="row row-cols-4 row-cols-md-1">
-                    <!-- Catergory item 1 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img
-                                src="./assets/img/category-item-3.webp"
-                                alt=""
-                                class="cate-item__thumb"
-                            />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title"
-                                    >Hi-Tea Vải</a
-                                >
-                                <p class="cate-item__desc">49.000 đ</p>
-                            </section>
-                        </article>
-                    </div>
-
-                    <!-- Catergory item 2 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img src="./assets/img/category-item-4.webp"" alt=""
-                            class="cate-item__thumb" />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title"
-                                    >Cà Phê Sữa Đá</a
-                                >
-                                <p class="cate-item__desc">29.000 đ</p>
-                            </section>
-                        </article>
-                    </div>
-
-                    <!-- Catergory item 3 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img
-                                src="./assets/img/category-item-5.webp"
-                                alt=""
-                                class="cate-item__thumb"
-                            />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title">
-                                    Bánh Mì VN Thịt Nguội
-                                </a>
-                                <p class="cate-item__desc">39.000 đ</p>
-                            </section>
-                        </article>
-                    </div>
-
-                    <!-- Catergory item 4 -->
-                    <div class="col">
-                        <article class="cate-item">
-                            <img
-                                src="./assets/img/category-item-6.webp"
-                                alt=""
-                                class="cate-item__thumb"
-                            />
-                            <section class="cate-item__info">
-                                <a href="#!" class="cate-item__title">
-                                    Mochi Kem Chocolate
-                                </a>
-                                <p class="cate-item__desc">19.000 đ</p>
-                            </section>
-                        </article>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Footer -->
-        <footer id="footer"></footer>
-        <script>
-            load("#footer", "./templates/footer.html");
-        </script>
-    </body>
 </html>
