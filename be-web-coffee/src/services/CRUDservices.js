@@ -79,7 +79,28 @@ const handleUpdateCus = async (cusId, name, address) => {
     }
 }
 
+const fileToBase64 = file => new Promise((resolve, reject) => {
+    fs.readFile(file, (err, data) => {
+        if (err) {
+            reject(err);
+        } else {
+            const base64Data = data.toString('base64');
+            resolve(base64Data);
+        }
+    });
+});
 
+const saveImageToDatabase = async (pool, productId, filePath) => {
+    try {
+        const base64Image = await fileToBase64(filePath);
+        const query = 'UPDATE product SET img_path = ($1) WHERE id = ($2)';
+        const values = [base64Image, productId];
+        await pool.query(query, values);
+        console.log('Image saved to database successfully for ID: ', productId);
+    } catch (error) {
+        console.error('Error saving image to database:', error);
+    }
+};
 
 
 module.exports = {
@@ -87,4 +108,5 @@ module.exports = {
     handleCustomerLogin,
     handleCusRegister,
     handleUpdateCus,
+    saveImageToDatabase
 }
