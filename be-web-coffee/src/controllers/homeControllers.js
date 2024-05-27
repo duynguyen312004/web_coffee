@@ -1,5 +1,7 @@
+const path = require('path');
 
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus } = require('../services/CRUDservices');
+
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveMultiImgsData, getImageDataById } = require('../services/CRUDservices');
 
 const getHomePage = async (req, res) => {
     let products = await getAllProduct();
@@ -71,9 +73,11 @@ const handleUpdate = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     getHomePage,
     handleLogin,
     handleRegister,
-    handleUpdate
+    handleUpdate,
 }

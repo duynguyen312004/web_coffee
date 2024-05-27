@@ -1,4 +1,6 @@
 const pool = require('../config/database');
+const fs = require('fs');
+const path = require('path');
 
 const getAllProduct = async () => {
     try {
@@ -6,8 +8,10 @@ const getAllProduct = async () => {
         return res.rows;
     } catch (err) {
         console.error('Query error:', err);
+        throw err;
     }
 }
+
 
 const handleCustomerLogin = async (sdt, password) => {
     return new Promise(async (resolve, reject) => {
@@ -75,9 +79,12 @@ const handleUpdateCus = async (cusId, name, address) => {
     }
 }
 
+
+
+
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
     handleCusRegister,
-    handleUpdateCus
+    handleUpdateCus,
 }
