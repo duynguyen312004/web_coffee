@@ -22,7 +22,7 @@ function renderProducts(products) {
         const productElement = `
             <div class="col">
                 <article class="cate-item">
-                    <img src="./assets/img/category-item-3.webp" alt="${product.name}" class="cate-item__thumb" onclick="location.href='view/sign-in.html';" />
+                    <img src="data:image/jpeg;base64,${product.img_path}" alt="${product.name}" class="cate-item__thumb" onclick="location.href='view/sign-in.html';" />
                     <section class="cate-item__info">
                         <a href="http://127.0.0.1:5501/fe-web-coffee/view/sign-in.html" class="cate-item__title">${product.name}</a>
                         <p class="cate-item__desc">${product.price} đ</p>
