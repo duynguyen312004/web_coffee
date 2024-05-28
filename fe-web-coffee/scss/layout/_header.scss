@@ -94,6 +94,14 @@ a:hover {
         }
     }
 
+    &__user {
+        position: relative;
+
+        &:hover .dropdown {
+            display: block;
+        }
+    }
+
     &__avatar {
         display: block;
         width: 50px;
