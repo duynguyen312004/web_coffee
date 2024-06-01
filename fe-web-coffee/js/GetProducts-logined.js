@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             renderProducts(products);
         })
         .catch((error) => console.error("Error fetching products:", error));
+    updateWallet();
 });
 
 function renderProducts(products) {
@@ -42,4 +43,11 @@ function renderProducts(products) {
 
         container.innerHTML += productElement;
     });
+}
+
+function updateWallet() {
+    const customerData = JSON.parse(localStorage.getItem('customer'));
+    if (customerData && customerData.wallet) {
+        document.getElementById('Wallet').textContent = "Ví của tôi: " + customerData.wallet + 'Đ';
+    }
 }
