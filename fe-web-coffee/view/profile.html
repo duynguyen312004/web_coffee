@@ -22,7 +22,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../js/GetProducts-logined.js" defer></script>
+    <script src="../js/Profile.js" defer></script>
     <script src="../assets/js/scripts.js"></script>
 </head>
 
@@ -42,8 +42,8 @@
                         <aside class="profile__sidebar">
                             <div class="profile-user">
                                 <img src="../assets/img/avatar.jpg" alt="" class="profile-user__avatar" />
-                                <h1 class="profile-user__name">
-                                    Nguyễn Văn A
+                                <h1 id="profile-name" class="profile-user__name">
+                                    <!-- The name will be populated here -->
                                 </h1>
                                 <p class="profile-user__desc">Khách hàng</p>
                             </div>
@@ -118,7 +118,7 @@
                                     <div class="col-4">
                                         <div class="form__group">
                                             <div class="form__text-input form__profile">
-                                                <input type="text" name="" id="last-name" placeholder="Họ và tên "
+                                                <input type="text" name="" id="full-name" placeholder="Họ và tên"
                                                     class="form__input" required />
                                                 <img src="" alt="" class="form__input-icon" />
                                             </div>
@@ -134,14 +134,10 @@
                                     <div class="col-1">
                                         <div class="form__group">
                                             <div class="form__text-input form__profile">
-                                                <input type="number" name="" id="sdt" placeholder="Số điện thoại"
-                                                    class="form__input" required minlength="10" />
+                                                <input type="number" name="" id="phone" placeholder="Số điện thoại"
+                                                    class="form__input" readonly />
                                                 <img src="" alt="" class="form__input-icon" />
                                             </div>
-                                            <p class="form__error">
-                                                Số điện thoại ít nhất 10 chữ
-                                                số
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -159,17 +155,15 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        </form>
 
-                        <button class="btn btn--primary">
-                            Lưu thông tin
-                        </button>
+                            <button id="save-infor-btn" class="btn btn--primary">
+                                Lưu thông tin
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Footer -->

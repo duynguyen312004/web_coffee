@@ -1268,7 +1268,10 @@ a:hover {
 }
 
 .header {
-  background-color: rgb(244, 237, 224);
+  position: sticky;
+  top: -11px;
+  z-index: 1;
+  background-color: rgba(244, 237, 224, 0.8);
 }
 
 .top-bar {
@@ -1347,6 +1350,10 @@ a:hover {
 }
 .top-act__user:hover .dropdown {
   display: block;
+}
+.top-act__user:hover .dropdown-balance {
+  color: #767676;
+  margin: 10px 0 2px 10px;
 }
 .top-act__avatar {
   display: block;
@@ -1948,10 +1955,10 @@ a:hover {
 
 .dropdown {
   position: absolute;
-  left: -90px;
+  left: -140px;
   padding-top: 10px;
   display: none;
-  width: 201px;
+  width: 250px;
 }
 .dropdown__inner {
   display: flex;
@@ -1972,7 +1979,7 @@ a:hover {
 .dropdown-action:hover {
   padding: 12px;
   border-radius: 10px;
-  background: #ccc;
+  background: #ebebeb;
 }
 
 .auth {

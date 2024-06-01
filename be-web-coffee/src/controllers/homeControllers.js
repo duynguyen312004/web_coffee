@@ -132,17 +132,17 @@ const handleRegister = async (req, res) => {
 }
 
 const handleUpdate = async (req, res) => {
-    let cusId = req.body.cusId;
+    let phone = req.body.phone;
     let name = req.body.name;
     let address = req.body.address;
-    if (!cusId || !name || !address) {
+    if (!phone || !name || !address) {
         return res.status(400).json({
             errCode: 1,
             message: "Missing parameters"
         })
     }
     try {
-        await handleUpdateCus(cusId, name, address);
+        await handleUpdateCus(phone, name, address);
         return res.status(200).json({
             errCode: 0,
             message: "Update thành công",

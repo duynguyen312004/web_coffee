@@ -71,9 +71,9 @@ const handleCusRegister = async (cusProfile) => {
     })
 }
 
-const handleUpdateCus = async (cusId, name, address) => {
+const handleUpdateCus = async (phone, name, address) => {
     try {
-        await pool.query("UPDATE customer SET name = $1, address = $2 WHERE id = $3", [name, address, cusId]);
+        await pool.query("UPDATE customer SET name = $1, address = $2 WHERE phone = $3", [name, address, phone]);
     } catch (error) {
         throw error;
     }
