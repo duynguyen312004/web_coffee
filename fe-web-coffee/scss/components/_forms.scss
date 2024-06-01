@@ -5,8 +5,8 @@
     }
 
     &__group {
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin-top: 8px;
+        margin-bottom: 30px;
 
         &--inline {
             display: flex;
@@ -81,5 +81,10 @@
             font-weight: 500;
             line-height: 146.667%;
         }
+    }
+
+    &__profile {
+        width: 500px;
+        margin-left: 20px;
     }
 }
