@@ -2,10 +2,10 @@
 
 .dropdown {
     position: absolute;
-    left: -90px;
+    left: -140px;
     padding-top: 10px;
     display: none;
-    width: 201px;
+    width: 250px;
 
     &__inner {
         display: flex;
@@ -29,6 +29,6 @@
     &-action:hover {
         padding: 12px;
         border-radius: 10px;
-        background: #ccc;
+        background: #ebebeb;
     }
 }
