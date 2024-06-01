@@ -35,6 +35,7 @@ async function handleLogIn(event) {
         if (data && data.errCode === 0) {
             // Xử lý đăng nhập thành công (ví dụ: chuyển hướng đến trang khác)
             document.getElementById('loginResult').textContent = 'Login successful!';
+            localStorage.setItem('customer', JSON.stringify(data.customer));
             // Chuyển hướng đến trang sign-up.html
             window.location.href = 'index-logined.html';
         }

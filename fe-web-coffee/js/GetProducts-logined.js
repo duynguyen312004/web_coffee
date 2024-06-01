@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function renderProducts(products) {
     const containers = document.querySelectorAll('.row.row-cols-4.row-cols-md-1');
+
+    if (containers.length === 0) {
+        console.error('No containers found with the class .row.row-cols-4.row-cols-md-1');
+        return;
+    }
+
     containers.forEach(container => {
         container.innerHTML = ''; // Clear existing content
     });

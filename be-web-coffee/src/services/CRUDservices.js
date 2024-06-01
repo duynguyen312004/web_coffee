@@ -19,7 +19,7 @@ const handleCustomerLogin = async (sdt, password) => {
         try {
             let exist = await checkCusSdt(sdt);
             if (exist) {
-                const result = await pool.query('SELECT id, phone, password FROM customer WHERE phone = $1', [sdt]);
+                const result = await pool.query('SELECT id, phone, password, wallet, address, name FROM customer WHERE phone = $1', [sdt]);
                 if (result.rows.length > 0) {
                     let customer = result.rows[0];
                     if (customer.password === password) {
@@ -103,10 +103,11 @@ const saveImageToDatabase = async (pool, productId, filePath) => {
 };
 
 
+
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
     handleCusRegister,
     handleUpdateCus,
-    saveImageToDatabase
+    saveImageToDatabase,
 }

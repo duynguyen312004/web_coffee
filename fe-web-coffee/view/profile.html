@@ -1,261 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The Coffee House</title>
 
-        <!-- Favicon -->
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="../assets/favicon/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="../assets/favicon/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="../assets/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="../assets/favicon/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Coffee House</title>
 
-        <!-- Font -->
-        <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="../assets/css/main.css" />
+    <!-- Font -->
+    <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/GetProducts-logined.js" defer></script>
-        <script src="../assets/js/scripts.js"></script>
-    </head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-    <body>
-        <!-- Header -->
-        <header id="header" class="header"></header>
-        <script>
-            load("#header", "../templates/header-logined.html");
-        </script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/GetProducts-logined.js" defer></script>
+    <script src="../assets/js/scripts.js"></script>
+</head>
 
-        <!-- Profile content -->
-        <div class="profile">
-            <div class="container">
-                <div class="profile-container">
-                    <div class="row">
-                        <div class="col-4">
-                            <aside class="profile__sidebar">
-                                <div class="profile-user">
-                                    <img
-                                        src="../assets/img/avatar.jpg"
-                                        alt=""
-                                        class="profile-user__avatar"
-                                    />
-                                    <h1 class="profile-user__name">
-                                        Nguyễn Văn A
-                                    </h1>
-                                    <p class="profile-user__desc">Khách hàng</p>
+<body>
+    <!-- Header -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "../templates/header-logined.html");
+    </script>
+
+    <!-- Profile content -->
+    <div class="profile">
+        <div class="container">
+            <div class="profile-container">
+                <div class="row">
+                    <div class="col-4">
+                        <aside class="profile__sidebar">
+                            <div class="profile-user">
+                                <img src="../assets/img/avatar.jpg" alt="" class="profile-user__avatar" />
+                                <h1 class="profile-user__name">
+                                    Nguyễn Văn A
+                                </h1>
+                                <p class="profile-user__desc">Khách hàng</p>
+                            </div>
+
+                            <!-- Menu 1 -->
+                            <div class="profile-menu">
+                                <h3 class="profile-menu__title"></h3>
+                                <ul class="profile-menu__list">
+                                    <li>
+                                        <a href="#!" class="profile-menu__link">
+                                            <span class="profile-menu__icon">
+                                                <img src="../assets/icons/profile.svg" alt="" class="icon" />
+                                            </span>
+                                            Thông tin tài khoản
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="profile-menu__link">
+                                            <span class="profile-menu__icon">
+                                                <img src="../assets/icons/location.svg" alt="" class="icon" />
+                                            </span>
+                                            Địa chỉ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="profile-menu__link">
+                                            <span class="profile-menu__icon">
+                                                <img src="../assets/icons/buy-history.svg" alt="" class="icon" />
+                                            </span>
+                                            Lịch sử mua hàng
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!" class="profile-menu__link">
+                                            <span class="profile-menu__icon">
+                                                <img src="../assets/icons/your-favorite.svg" alt="" class="icon" />
+                                            </span>
+                                            Sản phẩm yêu thích
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <div class="col-8">
+                        <div class="user-info">
+                            <h2 class="user-info__title">
+                                Thông tin tài khoản
+                            </h2>
+
+                            <!-- Wallet -->
+                            <h3 class="user-info__heading">Ví của tôi</h3>
+                            <div class="row row__payment-card">
+                                <div class="col-6">
+                                    <img src="../assets/img/profile/payment-card.png" alt="" class="payment-card" />
                                 </div>
-
-                                <!-- Menu 1 -->
-                                <div class="profile-menu">
-                                    <h3 class="profile-menu__title"></h3>
-                                    <ul class="profile-menu__list">
-                                        <li>
-                                            <a
-                                                href="#!"
-                                                class="profile-menu__link"
-                                            >
-                                                <span
-                                                    class="profile-menu__icon"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/profile.svg"
-                                                        alt=""
-                                                        class="icon"
-                                                    />
-                                                </span>
-                                                Thông tin tài khoản
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="#!"
-                                                class="profile-menu__link"
-                                            >
-                                                <span
-                                                    class="profile-menu__icon"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/location.svg"
-                                                        alt=""
-                                                        class="icon"
-                                                    />
-                                                </span>
-                                                Địa chỉ
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="#!"
-                                                class="profile-menu__link"
-                                            >
-                                                <span
-                                                    class="profile-menu__icon"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/buy-history.svg"
-                                                        alt=""
-                                                        class="icon"
-                                                    />
-                                                </span>
-                                                Lịch sử mua hàng
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="#!"
-                                                class="profile-menu__link"
-                                            >
-                                                <span
-                                                    class="profile-menu__icon"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/your-favorite.svg"
-                                                        alt=""
-                                                        class="icon"
-                                                    />
-                                                </span>
-                                                Sản phẩm yêu thích
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </aside>
-                        </div>
-
-                        <div class="col-8">
-                            <div class="user-info">
-                                <h2 class="user-info__title">
-                                    Thông tin tài khoản
-                                </h2>
-
-                                <!-- Wallet -->
-                                <h3 class="user-info__heading">Ví của tôi</h3>
-                                <div class="row row__payment-card">
-                                    <div class="col-6">
-                                        <img
-                                            src="../assets/img/profile/payment-card.png"
-                                            alt=""
-                                            class="payment-card"
-                                        />
+                                <div class="col-6">
+                                    <div class="add-new-card">
+                                        <img src="../assets/icons/add-new-card.svg" alt="" class="add-new-card__icon" />
+                                        <a>Thêm thẻ mới</a>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="add-new-card">
-                                            <img
-                                                src="../assets/icons/add-new-card.svg"
-                                                alt=""
-                                                class="add-new-card__icon"
-                                            />
-                                            <a>Thêm thẻ mới</a>
+                                </div>
+                            </div>
+
+                            <!-- User info -->
+                            <h3 class="user-info__heading">
+                                Tên khách hàng
+                            </h3>
+                            <form action="" class="form">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form__group">
+                                            <div class="form__text-input form__profile">
+                                                <input type="text" name="" id="last-name" placeholder="Họ và tên "
+                                                    class="form__input" required />
+                                                <img src="" alt="" class="form__input-icon" />
+                                            </div>
+                                            <p class="form__error"></p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- User info -->
                                 <h3 class="user-info__heading">
-                                    Tên khách hàng
+                                    Số điện thoại
                                 </h3>
-                                <form action="" class="form">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form__group">
-                                                <div class="form__text-input">
-                                                    <input
-                                                        type="text"
-                                                        name=""
-                                                        id="last-name"
-                                                        placeholder="Họ"
-                                                        class="form__input"
-                                                        required
-                                                    />
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                        class="form__input-icon"
-                                                    />
-                                                </div>
-                                                <p class="form__error"></p>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="form__group">
+                                            <div class="form__text-input form__profile">
+                                                <input type="number" name="" id="sdt" placeholder="Số điện thoại"
+                                                    class="form__input" required minlength="10" />
+                                                <img src="" alt="" class="form__input-icon" />
                                             </div>
+                                            <p class="form__error">
+                                                Số điện thoại ít nhất 10 chữ
+                                                số
+                                            </p>
                                         </div>
-                                        <div class="col-2"></div>
-                                        <div class="col-4">
-                                            <div class="form__group">
-                                                <div class="form__text-input">
-                                                    <input
-                                                        type="text"
-                                                        name=""
-                                                        id="first-name"
-                                                        placeholder="Tên"
-                                                        class="form__input"
-                                                        required
-                                                    />
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                        class="form__input-icon"
-                                                    />
-                                                </div>
-                                                <p class="form__error"></p>
+                                    </div>
+                                </div>
+
+                                <h3 class="user-info__heading">Địa chỉ</h3>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="form__group">
+                                            <div class="form__text-input form__profile">
+                                                <input type="text" name="" id="address" placeholder="Địa chỉ"
+                                                    class="form__input" />
+                                                <img src="" alt="" class="form__input-icon" />
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <h3 class="user-info__heading">
-                                        Số điện thoại
-                                    </h3>
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <div class="form__group">
-                                                <div class="form__text-input">
-                                                    <input
-                                                        type="number"
-                                                        name=""
-                                                        id="sdt"
-                                                        placeholder="Số điện thoại"
-                                                        class="form__input"
-                                                        required
-                                                        minlength="10"
-                                                    />
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                        class="form__input-icon"
-                                                    />
-                                                </div>
-                                                <p class="form__error">
-                                                    Số điện thoại ít nhất 10 chữ
-                                                    số
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="user-info__heading">
+                                <!-- <h3 class="user-info__heading">
                                         Ngày tháng năm sinh
                                     </h3>
                                     <div class="row">
                                         <div class="col-1">
                                             <div class="form__group">
-                                                <div class="form__text-input">
+                                                <div class="form__text-input form__profile">
                                                     <input
                                                         type="date"
                                                         name=""
@@ -278,7 +188,7 @@
                                     <div class="row">
                                         <div class="col-1">
                                             <div class="form__group">
-                                                <div class="form__text-input">
+                                                <div class="form__text-input form__profile">
                                                     <input
                                                         type="email"
                                                         name=""
@@ -294,9 +204,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <h3 class="user-info__heading">
+                                <!-- <h3 class="user-info__heading">
                                         Giới tính
                                     </h3>
                                     <div class="user-info__gender">
@@ -318,23 +228,24 @@
                                             />
                                             Nữ
                                         </label>
-                                    </div>
-                                </form>
+                                    </div> -->
+                            </form>
 
-                                <button class="btn btn--primary">
-                                    Lưu thông tin
-                                </button>
-                            </div>
+                            <button class="btn btn--primary">
+                                Lưu thông tin
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Footer -->
-        <footer id="footer"></footer>
-        <script>
-            load("#footer", "../templates/footer-logined.html");
-        </script>
-    </body>
+    <!-- Footer -->
+    <footer id="footer"></footer>
+    <script>
+        load("#footer", "../templates/footer-logined.html");
+    </script>
+</body>
+
 </html>

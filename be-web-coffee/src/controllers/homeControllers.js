@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, } = require('../services/CRUDservices');
+const { error } = require('console');
 
 const imageFileMapping = {
     1: 'Phin Sữa Tươi Bánh Flan.webp',
@@ -177,5 +178,5 @@ module.exports = {
     handleLogin,
     handleRegister,
     handleUpdate,
-    loadImagesToDatabase
+    loadImagesToDatabase,
 }
