@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -91,6 +91,21 @@ const getHomePage = async (req, res) => {
     return res.json(products);
 }
 
+const getProduct = async (req, res) => {
+    try {
+        let productId = req.params.id;
+        let product = await getProductInfor(productId);
+        if (product.length > 0) {
+            return res.json(product[0]);
+        } else {
+            return res.status(404).json({ message: "Product not found" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Interal server error" });
+    }
+}
+
 const handleLogin = async (req, res) => {
     let sdt = req.body.sdt;
     let password = req.body.password;
@@ -114,7 +129,7 @@ const handleRegister = async (req, res) => {
     let password = req.body.password;
     let address = req.body.address;
     let name = req.body.name;
-    let wallet = 0;
+    let wallet = 1000000;
     if (!sdt || !password || !address || !name) {
         return res.status(500).json({
             errCode: 1,
@@ -179,4 +194,5 @@ module.exports = {
     handleRegister,
     handleUpdate,
     loadImagesToDatabase,
+    getProduct
 }

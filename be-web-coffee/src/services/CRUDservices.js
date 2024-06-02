@@ -102,7 +102,16 @@ const saveImageToDatabase = async (pool, productId, filePath) => {
     }
 };
 
+const getProductInfor = async (productId) => {
 
+    try {
+        let res = await pool.query("SELECT * FROM product WHERE id = $1", [productId]);
+        return res.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
 
 module.exports = {
     getAllProduct,
@@ -110,4 +119,5 @@ module.exports = {
     handleCusRegister,
     handleUpdateCus,
     saveImageToDatabase,
+    getProductInfor
 }
