@@ -1,4 +1,6 @@
 const pool = require('../config/database');
+const fs = require('fs');
+const path = require('path');
 
 const getAllProduct = async () => {
     try {
@@ -6,8 +8,10 @@ const getAllProduct = async () => {
         return res.rows;
     } catch (err) {
         console.error('Query error:', err);
+        throw err;
     }
 }
+
 
 const handleCustomerLogin = async (sdt, password) => {
     return new Promise(async (resolve, reject) => {
@@ -15,7 +19,7 @@ const handleCustomerLogin = async (sdt, password) => {
         try {
             let exist = await checkCusSdt(sdt);
             if (exist) {
-                const result = await pool.query('SELECT id, phone, password FROM customer WHERE phone = $1', [sdt]);
+                const result = await pool.query('SELECT id, phone, password, wallet, address, name FROM customer WHERE phone = $1', [sdt]);
                 if (result.rows.length > 0) {
                     let customer = result.rows[0];
                     if (customer.password === password) {
@@ -67,11 +71,45 @@ const handleCusRegister = async (cusProfile) => {
     })
 }
 
-const handleUpdateCus = async (cusId, name, address) => {
+const handleUpdateCus = async (phone, name, address) => {
     try {
-        await pool.query("UPDATE customer SET name = $1, address = $2 WHERE id = $3", [name, address, cusId]);
+        await pool.query("UPDATE customer SET name = $1, address = $2 WHERE phone = $3", [name, address, phone]);
     } catch (error) {
         throw error;
+    }
+}
+
+const fileToBase64 = file => new Promise((resolve, reject) => {
+    fs.readFile(file, (err, data) => {
+        if (err) {
+            reject(err);
+        } else {
+            const base64Data = data.toString('base64');
+            resolve(base64Data);
+        }
+    });
+});
+
+const saveImageToDatabase = async (pool, productId, filePath) => {
+    try {
+        const base64Image = await fileToBase64(filePath);
+        const query = 'UPDATE product SET img_path = ($1) WHERE id = ($2)';
+        const values = [base64Image, productId];
+        await pool.query(query, values);
+        console.log('Image saved to database successfully for ID: ', productId);
+    } catch (error) {
+        console.error('Error saving image to database:', error);
+    }
+};
+
+const getProductInfor = async (productId) => {
+
+    try {
+        let res = await pool.query("SELECT * FROM product WHERE id = $1", [productId]);
+        return res.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
     }
 }
 
@@ -79,5 +117,7 @@ module.exports = {
     getAllProduct,
     handleCustomerLogin,
     handleCusRegister,
-    handleUpdateCus
+    handleUpdateCus,
+    saveImageToDatabase,
+    getProductInfor
 }

@@ -1,0 +1,106 @@
+.prod-info {
+    padding: 30px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+
+    &__heading {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    &__price {
+        margin-top: 10px;
+        margin-bottom: 40px;
+        font-size: 25px;
+        font-weight: 600;
+        color: #e57905;
+    }
+
+    .btn--primary {
+        margin-top: 20px;
+    }
+}
+
+.prod-preview {
+    &__img {
+        width: 530px;
+        border-radius: 10px;
+    }
+}
+
+.topping-options {
+    display: flex;
+    flex-wrap: wrap;
+    .btn {
+        border: 2px solid #ebebeb;
+        margin-bottom: 10px;
+        background-color: transparent;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+}
+
+.size {
+    &-options {
+        display: flex;
+        flex-wrap: wrap;
+        .btn {
+            border: 2px solid #ebebeb;
+            margin-bottom: 10px;
+            background-color: transparent;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    }
+    &-text {
+        font-size: 15px;
+        color: #706e6e;
+    }
+    &-desc {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
+// Product description
+.product-desc {
+    margin: 40px 0;
+    border-top: 1px solid #ccc;
+
+    &__title {
+        margin: 30px 0 15px 0;
+        font-size: 17px;
+        font-weight: 600;
+    }
+}
+
+.rlv-product {
+    margin: 40px 0;
+    border-top: 1px solid #ccc;
+
+    &__title {
+        margin: 30px 0 15px 0;
+        font-size: 17px;
+        font-weight: 600;
+    }
+}
+
+.rlv-product {
+    &__img {
+        width: 160px;
+        height: 160px;
+        border-radius: 10px;
+    }
+
+    &__name {
+        font-weight: 600;
+        display: block;
+        margin: 15px 0 10px 0px;
+    }
+}

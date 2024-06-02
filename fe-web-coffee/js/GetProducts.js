@@ -10,28 +10,30 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function renderProducts(products) {
-    const productContainer1 = document.querySelector('.row.row-cols-4.row-cols-md-1:first-of-type');
-    const productContainer2 = document.querySelector('.row.row-cols-4.row-cols-md-1:nth-of-type(2)');
-    productContainer1.innerHTML = ''; // Clear existing content
-    productContainer2.innerHTML = ''; // Clear existing content
+    const containers = document.querySelectorAll('.row.row-cols-4.row-cols-md-1');
+    containers.forEach(container => {
+        container.innerHTML = ''; // Clear existing content
+    });
 
     products.forEach((product, index) => {
+        const containerIndex = index % containers.length;
+        const container = containers[containerIndex];
+
         const productElement = `
             <div class="col">
                 <article class="cate-item">
-                    <img src="./assets/img/category-item-2.webp
-                    " alt="${product.name}" class="cate-item__thumb" />
+                    <img src="data:image/jpeg;base64,${product.img_path}" alt="${product.name}" class="cate-item__thumb" onclick="location.href='view/sign-in.html';" />
                     <section class="cate-item__info">
-                        <a href="#!" class="cate-item__title">${product.name}</a>
-                        <p class="cate-item__desc">${product.price} đ</p>
+                        <a href="http://127.0.0.1:5501/fe-web-coffee/view/sign-in.html" class="cate-item__title">${product.name}</a>
+                        <p class="cate-item__desc">${formatPrice(product.price)} đ</p>
                     </section>
-                </article>  
+                </article>
             </div>
         `;
-        if (index < 4) {
-            productContainer1.innerHTML += productElement;
-        } else {
-            productContainer2.innerHTML += productElement;
-        }
+
+        container.innerHTML += productElement;
     });
+}
+function formatPrice(price) {
+    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
 }

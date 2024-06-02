@@ -1,105 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sign up | The Coffee House</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign up | The Coffee House</title>
+        <!-- Favicon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../assets/favicon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../assets/favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="../assets/favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Font -->
+        <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
 
-    <!-- Font -->
-    <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
+        <!-- Styles -->
+        <link rel="stylesheet" href="../assets/css/main.css" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="../assets/css/main.css" />
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../js/SignUp.js" defer></script>
+        <script src="../assets/js/scripts.js"></script>
+    </head>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../js/SignUp.js" defer></script>
-    <script src="../assets/js/scripts.js"></script>
-</head>
-
-<body>
-    <main class="auth">
-        <div class="auth__content">
-            <div class="auth__content-inner">
-                <a href="" class="logo">
-                    <img src="../assets/img/tch-logo.png" alt="" class="logo__img" />
-                </a>
-                <h1 class="auth__heading">Đăng ký</h1>
-                <p class="auth__desc">
-                    Hãy đăng ký trở thành thành viên của The Coffee House
-                </p>
-                <form action="" id="signUpForm" class="form auth__form">
-                    <div class="form__text-input">
-                        <input type="text" name="" id="sdt" placeholder="Số điện thoại" class="form__input" required
-                            minlength="10" autocomplete="sdt" />
-                        <img src="" alt="" class="form__input-icon" />
-                    </div>
-                    <p class="form__error">
-                        Số điện thoại ít nhất 10 chữ số
+    <body>
+        <main class="auth">
+            <div class="auth__content">
+                <div class="auth__content-inner">
+                    <a href="../index.html" class="logo">
+                        <img
+                            src="../assets/img/tch-logo.png"
+                            alt=""
+                            class="logo__img"
+                        />
+                    </a>
+                    <h1 class="auth__heading">Đăng ký</h1>
+                    <p class="auth__desc">
+                        Hãy đăng ký trở thành thành viên của The Coffee House
                     </p>
-                    <div class="form__group">
+                    <form action="" id="signUpForm" class="form auth__form">
                         <div class="form__text-input">
-                            <input type="password" name="" id="password" placeholder="Mật khẩu" class="form__input"
-                                required minlength="6" autocomplete="new-password" />
+                            <input
+                                type="text"
+                                name=""
+                                id="sdt"
+                                placeholder="Số điện thoại"
+                                class="form__input"
+                                required
+                                minlength="10"
+                                autocomplete="sdt"
+                            />
                             <img src="" alt="" class="form__input-icon" />
                         </div>
-                        <p class="form__error">Mật khẩu ít nhất 6 ký tự</p>
-                    </div>
-                    <div class="form__group">
-                        <div class="form__text-input">
-                            <input type="password" name="" id="re_password" placeholder="Xác nhận mật khẩu"
-                                class="form__input" required autocomplete="new-password" />
-                            <img src="" alt="" class="form__input-icon" />
+                        <p class="form__error">
+                            Số điện thoại ít nhất 10 chữ số
+                        </p>
+                        <div class="form__group">
+                            <div class="form__text-input">
+                                <input
+                                    type="password"
+                                    name=""
+                                    id="password"
+                                    placeholder="Mật khẩu"
+                                    class="form__input"
+                                    required
+                                    minlength="6"
+                                    autocomplete="new-password"
+                                />
+                                <img src="" alt="" class="form__input-icon" />
+                            </div>
+                            <p class="form__error">Mật khẩu ít nhất 6 ký tự</p>
                         </div>
-                        <p class="form__error">Mật khẩu ít nhất 6 ký tự</p>
-                    </div>
-                    <div class="form__group">
-                        <div class="form__text-input">
-                            <input type="text" name="name" id="name" placeholder="Tên" class="form__input" required />
-                            <img src="" alt="" class="form__input-icon" />
+                        <div class="form__group">
+                            <div class="form__text-input">
+                                <input
+                                    type="password"
+                                    name=""
+                                    id="re_password"
+                                    placeholder="Xác nhận mật khẩu"
+                                    class="form__input"
+                                    required
+                                    autocomplete="new-password"
+                                />
+                                <img src="" alt="" class="form__input-icon" />
+                            </div>
+                            <p class="form__error">Mật khẩu ít nhất 6 ký tự</p>
                         </div>
-                        <p class="form__error">Tên không được để trống</p>
-                    </div>
-                    <div class="form__group">
-                        <div class="form__text-input">
-                            <input type="text" name="address" id="address" placeholder="Địa chỉ" class="form__input"
-                                required />
-                            <img src="" alt="" class="form__input-icon" />
+                        <div class="form__group">
+                            <div class="form__text-input">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    placeholder="Tên"
+                                    class="form__input"
+                                    required
+                                />
+                                <img src="" alt="" class="form__input-icon" />
+                            </div>
+                            <p class="form__error">Tên không được để trống</p>
                         </div>
-                        <p class="form__error">Địa chỉ không được để trống</p>
-                    </div>
-                    <div class="form__group form__group--inline">
-                        <label class="form__checkbox">
-                            <input type="checkbox" name="" id="" class="form__checkbox-input" />
-                            <span class="form__checkbox-label">Đặt làm mật khẩu mặc định</span>
-                        </label>
-                        <a href="" class="auth__link">Khôi phục mật khẩu</a>
-                    </div>
-                    <div class="form__group auth__btn-group">
-                        <button type="submit" class="btn btn--primary auth__btn form__submit-btn">
-                            Đăng ký
-                        </button>
-                    </div>
-                </form>
+                        <div class="form__group">
+                            <div class="form__text-input">
+                                <input
+                                    type="text"
+                                    name="address"
+                                    id="address"
+                                    placeholder="Địa chỉ"
+                                    class="form__input"
+                                    required
+                                />
+                                <img src="" alt="" class="form__input-icon" />
+                            </div>
+                            <p class="form__error">
+                                Địa chỉ không được để trống
+                            </p>
+                        </div>
+                        <div class="form__group form__group--inline">
+                            <label class="form__checkbox">
+                                <input
+                                    type="checkbox"
+                                    name=""
+                                    id=""
+                                    class="form__checkbox-input"
+                                />
+                                <span class="form__checkbox-label"
+                                    >Đặt làm mật khẩu mặc định</span
+                                >
+                            </label>
+                            <a href="" class="auth__link">Khôi phục mật khẩu</a>
+                        </div>
+                        <div class="form__group auth__btn-group">
+                            <button
+                                type="submit"
+                                class="btn btn--primary auth__btn form__submit-btn"
+                            >
+                                Đăng ký
+                            </button>
+                        </div>
+                    </form>
 
-                <div class="auth__text">
-                    Bạn đã có tài khoản?
-                    <a href="./sign-in.html" class="auth__link">Đăng nhập</a>
+                    <div class="auth__text">
+                        Bạn đã có tài khoản?
+                        <a href="./sign-in.html" class="auth__link"
+                            >Đăng nhập</a
+                        >
+                    </div>
+                    <p style="color: red" id="signUpResult"></p>
                 </div>
-                <p style="color: red;" id="signUpResult"></p>
             </div>
-
-        </div>
-    </main>
-</body>
-
+        </main>
+    </body>
 </html>
