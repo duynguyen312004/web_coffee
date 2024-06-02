@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+<<<<<<< HEAD
+=======
+    loadCartDropdown();
+    updateWallet();
+>>>>>>> f040e7ad9767c8adc53f98c04ac28d4384e4126a
     document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
     // Gọi API để lấy danh sách sản phẩm
     axios
