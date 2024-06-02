@@ -1,5 +1,3 @@
-
-
 let state = {
     sdt: '',
     password: '',
@@ -35,8 +33,8 @@ async function handleLogIn(event) {
         if (data && data.errCode === 0) {
             // Xử lý đăng nhập thành công (ví dụ: chuyển hướng đến trang khác)
             document.getElementById('loginResult').textContent = 'Login successful!';
-            localStorage.setItem('customer', JSON.stringify(data.customer));
-            // Chuyển hướng đến trang sign-up.html
+            sessionStorage.setItem('customer', JSON.stringify(data.customer)); // Sửa lại phần này
+            // Chuyển hướng đến trang index-logined.html
             window.location.href = 'index-logined.html';
         }
     } catch (error) {

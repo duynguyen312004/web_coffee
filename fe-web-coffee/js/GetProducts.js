@@ -25,7 +25,7 @@ function renderProducts(products) {
                     <img src="data:image/jpeg;base64,${product.img_path}" alt="${product.name}" class="cate-item__thumb" onclick="location.href='view/sign-in.html';" />
                     <section class="cate-item__info">
                         <a href="http://127.0.0.1:5501/fe-web-coffee/view/sign-in.html" class="cate-item__title">${product.name}</a>
-                        <p class="cate-item__desc">${product.price} đ</p>
+                        <p class="cate-item__desc">${formatPrice(product.price)} đ</p>
                     </section>
                 </article>
             </div>
@@ -33,4 +33,7 @@ function renderProducts(products) {
 
         container.innerHTML += productElement;
     });
+}
+function formatPrice(price) {
+    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
 }

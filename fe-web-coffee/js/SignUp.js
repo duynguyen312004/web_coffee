@@ -61,7 +61,7 @@ async function handleRegister(event) {
         }
         if (data && data.errCode === 0) {
             document.getElementById('signUpResult').textContent = "Sign Up Successful!";
-            window.location.href = 'index-logined.html';
+            window.location.href = 'sign-in.html';
         }
     } catch (error) {
         if (error.response && error.response.data) {
