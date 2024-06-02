@@ -1446,94 +1446,65 @@ a:hover {
 
 .footer {
   margin-top: 40px;
-  position: relative;
   width: 100%;
-  height: 300px;
   background-color: rgba(0, 0, 0, 0.8509803922);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  box-sizing: border-box;
 }
-
 .footer__column {
-  position: absolute;
-  margin-top: 35px;
-  margin-left: 35px;
+  flex: 1;
+  min-width: 200px;
   color: #fff;
   letter-spacing: 0.005cm;
 }
-
+.footer__column:first-of-type {
+  margin-left: 10px;
+}
 .footer__column-heading {
   font-weight: 600;
   font-size: 15px;
   margin-bottom: 16px;
 }
-
 .footer__column-items a {
   color: #fff;
   line-height: 20px;
-  font-family: "Lato", sans-serif;
   font-size: 11px;
 }
-
 .footer__column-items li {
   margin: 15px 0;
 }
-
-.footer__column2 {
-  position: absolute;
-  margin-top: 35px;
-  margin-left: 300px;
-  color: #fff;
-  letter-spacing: 0.005cm;
-}
-
-.footer__column3 {
-  position: absolute;
-  margin-top: 35px;
-  margin-left: 600px;
-  color: #fff;
-  letter-spacing: 0.005cm;
-}
-
-.footer__column-heading {
-  margin-bottom: 30px;
-}
-
 .footer__address p {
   width: 225px;
   font-size: 12px;
   letter-spacing: 0.005cm;
   line-height: 1.5;
 }
-
-.footer__column4 {
-  position: absolute;
-  margin-top: 35px;
-  margin-left: 930px;
-  color: #fff;
-  letter-spacing: 0.005cm;
-}
-
 .footer__fb-banner {
   width: 270px;
   height: 130px;
   object-fit: cover;
 }
-
 .footer__social {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+.footer__social a {
   display: flex;
   width: 30px;
   height: 30px;
-  margin-top: 30px;
-  gap: 20px;
 }
-
-.footer-instagram {
+.footer__social .footer-instagram {
   margin-top: -2px;
   width: 35px;
   height: 35px;
   object-fit: cover;
 }
-
-.footer__social a {
+.footer .container {
   display: flex;
 }
 
