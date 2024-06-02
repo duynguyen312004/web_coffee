@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor, getProductCoffeeInfor, getProductTeaInfor } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -187,6 +187,33 @@ const loadImagesToDatabase = async () => {
     }
 };
 
+const getProductCoffee = async (req, res) => {
+    try {
+        let products = await getProductCoffeeInfor();
+        if (products.length > 0) {
+            return res.json(products);
+        } else {
+            return res.status(404).json({ message: "Product not found" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const getProductTea = async (req, res) => {
+    try {
+        let products = await getProductTeaInfor();
+        if (products.length > 0) {
+            return res.json(products);
+        } else {
+            return res.status(404).json({ message: "Product not found" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
 
 module.exports = {
     getHomePage,
@@ -194,5 +221,7 @@ module.exports = {
     handleRegister,
     handleUpdate,
     loadImagesToDatabase,
-    getProduct
+    getProduct,
+    getProductCoffee,
+    getProductTea
 }
