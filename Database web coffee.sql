@@ -21,7 +21,7 @@ CREATE TABLE product (
     price numeric(10, 2) NOT NULL,
     category varchar(50),
     inventory integer NOT NULL,
-    img_path varchar(255),
+    img_path text,
     description text
 );
 
@@ -42,6 +42,131 @@ CREATE TABLE order_detail (
     FOREIGN KEY (orderid) REFERENCES "order" (id),
     FOREIGN KEY (productid) REFERENCES product (id)
 );
+
+1.Hàm tính tổng giá trị đơn hàng:
+CREATE OR REPLACE FUNCTION calculate_total_price(order_id INT)
+RETURNS NUMERIC AS $$
+DECLARE
+    total NUMERIC(10, 2);
+BEGIN
+    SELECT SUM(unit_price * quantity) INTO total
+    FROM order_detail
+    WHERE orderid = order_id;
+    RETURN total;
+END;
+$$ LANGUAGE plpgsql;
+2.Hàm cập nhật tồn kho sản phẩm:
+CREATE OR REPLACE FUNCTION update_inventory(product_id INT, quantity INT)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE product
+    SET inventory = inventory - quantity
+    WHERE id = product_id;
+END;
+$$ LANGUAGE plpgsql;
+3. Trigger để cập nhật tổng giá trị trong bảng đơn hàng khi có thay đổi trong bảng order_detail:
+CREATE OR REPLACE FUNCTION update_order_total_price()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE "order"
+    SET total_price = calculate_total_price(NEW.orderid)
+    WHERE id = NEW.orderid;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_update_order_total_price
+AFTER INSERT OR UPDATE ON order_detail
+FOR EACH ROW
+EXECUTE FUNCTION update_order_total_price();
+4.Trigger để kiểm tra số lượng tồn kho trước khi thêm order_detail:
+CREATE OR REPLACE FUNCTION check_inventory()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (SELECT inventory FROM product WHERE id = NEW.productid) < NEW.quantity THEN
+        RAISE EXCEPTION 'Không đủ tồn kho cho sản phẩm %', NEW.productid;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_check_inventory
+BEFORE INSERT OR UPDATE ON order_detail
+FOR EACH ROW
+EXECUTE FUNCTION check_inventory();
+5.Hàm để kiểm tra số lượng tồn kho trước khi xóa chi tiết đơn hàng:
+CREATE OR REPLACE FUNCTION restore_inventory(product_id INT, quantity INT)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE product
+    SET inventory = inventory + quantity
+    WHERE id = product_id;
+END;
+$$ LANGUAGE plpgsql;
+6.Trigger để khôi phục số lượng tồn kho khi xóa chi tiết đơn hàng:
+CREATE OR REPLACE FUNCTION restore_product_inventory()
+RETURNS TRIGGER AS $$
+BEGIN
+    PERFORM restore_inventory(OLD.productid, OLD.quantity);
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_restore_product_inventory
+AFTER DELETE ON order_detail
+FOR EACH ROW
+EXECUTE FUNCTION restore_product_inventory();
+7.Trigger để cập nhật tổng giá trị đơn hàng khi xóa chi tiết đơn hàng:
+CREATE OR REPLACE FUNCTION update_order_total_price_after_delete()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE "order"
+    SET total_price = calculate_total_price(OLD.orderid)
+    WHERE id = OLD.orderid;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_update_order_total_price_after_delete
+AFTER DELETE ON order_detail
+FOR EACH ROW
+EXECUTE FUNCTION update_order_total_price_after_delete();
+8.Hàm cập nhật số dư ví của khách hàng sau khi thanh toán đơn hàng:
+CREATE OR REPLACE FUNCTION update_customer_wallet(customer_id INT, amount NUMERIC)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE customer
+    SET wallet = wallet - amount
+    WHERE id = customer_id;
+END;
+$$ LANGUAGE plpgsql;
+9.Trigger để cập nhật số dư ví của khách hàng sau khi tạo đơn hàng mới:
+CREATE OR REPLACE FUNCTION deduct_wallet_after_order()
+RETURNS TRIGGER AS $$
+BEGIN
+    PERFORM update_customer_wallet(NEW.customerid, NEW.total_price);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_deduct_wallet_after_order
+AFTER INSERT ON "order"
+FOR EACH ROW
+EXECUTE FUNCTION deduct_wallet_after_order();
+10.Trigger để cập nhật số dư ví của khách hàng sau khi hủy đơn hàng:
+CREATE OR REPLACE FUNCTION restore_wallet_after_order_cancel()
+RETURNS TRIGGER AS $$
+BEGIN
+    PERFORM update_customer_wallet(OLD.customerid, -OLD.total_price);
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_restore_wallet_after_order_cancel
+AFTER DELETE ON "order"
+FOR EACH ROW
+EXECUTE FUNCTION restore_wallet_after_order_cancel();
+
 
 INSERT INTO customer (wallet, phone, name, address, password) VALUES
 (5000.00, '1234567890', 'Nguyen Van A', '54 Nguyen Chi Thanh, Dong Da, Ha Noi','123456' ),
@@ -171,3 +296,6 @@ INSERT INTO order_detail (unit_price, quantity, orderid, productid) VALUES
 (20.00, 3, 1, 1),
 (5.00, 5, 2, 2),
 (3.00, 7, 3, 3);
+
+
+

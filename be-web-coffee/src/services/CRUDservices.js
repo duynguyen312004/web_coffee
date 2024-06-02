@@ -19,7 +19,7 @@ const handleCustomerLogin = async (sdt, password) => {
         try {
             let exist = await checkCusSdt(sdt);
             if (exist) {
-                const result = await pool.query('SELECT id, phone, password FROM customer WHERE phone = $1', [sdt]);
+                const result = await pool.query('SELECT id, phone, password, wallet, address, name FROM customer WHERE phone = $1', [sdt]);
                 if (result.rows.length > 0) {
                     let customer = result.rows[0];
                     if (customer.password === password) {
@@ -71,9 +71,9 @@ const handleCusRegister = async (cusProfile) => {
     })
 }
 
-const handleUpdateCus = async (cusId, name, address) => {
+const handleUpdateCus = async (phone, name, address) => {
     try {
-        await pool.query("UPDATE customer SET name = $1, address = $2 WHERE id = $3", [name, address, cusId]);
+        await pool.query("UPDATE customer SET name = $1, address = $2 WHERE phone = $3", [name, address, phone]);
     } catch (error) {
         throw error;
     }
@@ -102,11 +102,22 @@ const saveImageToDatabase = async (pool, productId, filePath) => {
     }
 };
 
+const getProductInfor = async (productId) => {
+
+    try {
+        let res = await pool.query("SELECT * FROM product WHERE id = $1", [productId]);
+        return res.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
 
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
     handleCusRegister,
     handleUpdateCus,
-    saveImageToDatabase
+    saveImageToDatabase,
+    getProductInfor
 }

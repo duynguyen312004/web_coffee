@@ -36,86 +36,32 @@
         <div class="top-act">
             <div class="top-act__cart">
                 <a href="../view/checkout.html">
-                    <img
-                        src="../assets/icons/cart-shopping-solid.svg"
-                        alt=""
-                        class="cart-icon"
-                    />
+                    <img src="../assets/icons/cart-shopping-solid.svg" alt="" class="cart-icon" />
                 </a>
                 <!-- Dropdown -->
                 <div class="dropdown">
-                    <div class="dropdown__inner">
+                    <div class="dropdown__inner" id="cart-dropdown">
                         <div class="dropdown-head" style="font-weight: 600">
                             Giỏ hàng của tôi
                         </div>
-
-                        <article class="dropdown-item">
-                            <img
-                                src="../assets/img/category-item-1.webp"
-                                alt="Bạc Sỉu"
-                                class="dropdown-item__thumb"
-                            />
-                            <section class="dropdown-item__info">
-                                <a
-                                    href="../view/product-detail.html"
-                                    class="dropdown-item__title"
-                                    >Bạc Sỉu</a
-                                >
-                                <p class="dropdown-item__desc">29.000 đ</p>
-                            </section>
-                        </article>
-
-                        <article class="dropdown-item">
-                            <img
-                                src="../assets/img/category-item-3.webp"
-                                alt="Bạc Sỉu"
-                                class="dropdown-item__thumb"
-                            />
-                            <section class="dropdown-item__info">
-                                <a href="#!" class="dropdown-item__title"
-                                    >Hồng Trà Sữa Trân Châu</a
-                                >
-                                <p class="dropdown-item__desc">55.000 đ</p>
-                            </section>
-                        </article>
-
-                        <article class="dropdown-item">
-                            <img
-                                src="../assets/img/category-item-1.webp"
-                                alt="Bạc Sỉu"
-                                class="dropdown-item__thumb"
-                            />
-                            <section class="dropdown-item__info">
-                                <a href="#!" class="dropdown-item__title"
-                                    >Bạc Sỉu</a
-                                >
-                                <p class="dropdown-item__desc">29.00 đ</p>
-                            </section>
-                        </article>
                     </div>
                 </div>
             </div>
 
             <div class="top-act__user">
-                <img
-                    src="../assets/img/avatar.jpg"
-                    alt=""
-                    class="top-act__avatar"
-                />
+                <img src="../assets/img/avatar.jpg" alt="" class="top-act__avatar" />
 
                 <!-- Dropdown -->
                 <div class="dropdown">
                     <div class="dropdown__inner">
                         <a href="../view/profile.html" class="dropdown-action">
                             Thông tin tài khoản
-                            <p class="dropdown-balance">Ví của tôi: 50.000 đ</p>
+                            <p class="dropdown-balance" id="Wallet"></p>
                         </a>
                         <a href="" class="dropdown-action">
                             Lịch sử mua hàng
                         </a>
-                        <a href="../index.html" class="dropdown-action"
-                            >Đăng xuất</a
-                        >
+                        <a class="dropdown-action" onclick="logout()">Đăng xuất</a>
                     </div>
                 </div>
             </div>

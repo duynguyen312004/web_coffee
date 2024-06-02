@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor } = require('../services/CRUDservices');
+const { error } = require('console');
 
 const imageFileMapping = {
     1: 'Phin Sữa Tươi Bánh Flan.webp',
@@ -90,6 +91,21 @@ const getHomePage = async (req, res) => {
     return res.json(products);
 }
 
+const getProduct = async (req, res) => {
+    try {
+        let productId = req.params.id;
+        let product = await getProductInfor(productId);
+        if (product.length > 0) {
+            return res.json(product[0]);
+        } else {
+            return res.status(404).json({ message: "Product not found" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Interal server error" });
+    }
+}
+
 const handleLogin = async (req, res) => {
     let sdt = req.body.sdt;
     let password = req.body.password;
@@ -113,7 +129,7 @@ const handleRegister = async (req, res) => {
     let password = req.body.password;
     let address = req.body.address;
     let name = req.body.name;
-    let wallet = 0;
+    let wallet = 1000000;
     if (!sdt || !password || !address || !name) {
         return res.status(500).json({
             errCode: 1,
@@ -131,17 +147,17 @@ const handleRegister = async (req, res) => {
 }
 
 const handleUpdate = async (req, res) => {
-    let cusId = req.body.cusId;
+    let phone = req.body.phone;
     let name = req.body.name;
     let address = req.body.address;
-    if (!cusId || !name || !address) {
+    if (!phone || !name || !address) {
         return res.status(400).json({
             errCode: 1,
             message: "Missing parameters"
         })
     }
     try {
-        await handleUpdateCus(cusId, name, address);
+        await handleUpdateCus(phone, name, address);
         return res.status(200).json({
             errCode: 0,
             message: "Update thành công",
@@ -177,5 +193,6 @@ module.exports = {
     handleLogin,
     handleRegister,
     handleUpdate,
-    loadImagesToDatabase
+    loadImagesToDatabase,
+    getProduct
 }
