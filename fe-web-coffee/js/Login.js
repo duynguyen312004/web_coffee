@@ -34,8 +34,11 @@ async function handleLogIn(event) {
             // Xử lý đăng nhập thành công (ví dụ: chuyển hướng đến trang khác)
             document.getElementById('loginResult').textContent = 'Login successful!';
             sessionStorage.setItem('customer', JSON.stringify(data.customer)); // Sửa lại phần này
-            // Chuyển hướng đến trang index-logined.html
-            window.location.href = 'index-logined.html';
+            if (data.customer.role === 'ADMIN') {
+                window.location.href = 'profile.html'
+            } else if (data.customer.role === 'Customer') {
+                window.location.href = 'index-logined.html';
+            }
         }
     } catch (error) {
         if (error.response && error.response.data) {

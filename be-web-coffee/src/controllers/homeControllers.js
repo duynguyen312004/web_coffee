@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor, getProductCoffeeInfor, getProductTeaInfor } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor, getProductCoffeeInfor, getProductTeaInfor, getProductOtherInfor, handleAdminLogin } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -110,18 +110,25 @@ const handleLogin = async (req, res) => {
     let sdt = req.body.sdt;
     let password = req.body.password;
     if (!sdt || !password) {
-        return res.status(500).json({
+        return res.status(400).json({
             errCode: 1,
             message: "Missing input parameters",
         })
     }
+    try {
+        let account = await handleAdminLogin(sdt, password);
+        if (!account || account.errCode !== 0) {
+            account = await handleCustomerLogin(sdt, password);
+        }
+        return res.status(200).json({
+            errCode: account.errCode,
+            message: account.errMessage,
+            customer: account.data ? account.data : {}
+        });
 
-    let customer = await handleCustomerLogin(sdt, password);
-    return res.status(200).json({
-        errCode: customer.errCode,
-        message: customer.errMessage,
-        customer: customer.data ? customer.data : {}
-    });
+    } catch (e) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
 }
 
 const handleRegister = async (req, res) => {
@@ -215,6 +222,20 @@ const getProductTea = async (req, res) => {
     }
 }
 
+const getProductOther = async (req, res) => {
+    try {
+        let products = await getProductOtherInfor();
+        if (products.length > 0) {
+            return res.json(products);
+        } else {
+            return res.status(404).json({ message: "Product not found" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 module.exports = {
     getHomePage,
     handleLogin,
@@ -223,5 +244,6 @@ module.exports = {
     loadImagesToDatabase,
     getProduct,
     getProductCoffee,
-    getProductTea
+    getProductTea,
+    getProductOther,
 }

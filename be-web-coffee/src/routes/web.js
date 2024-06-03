@@ -1,4 +1,4 @@
-const { getHomePage, handleLogin, handleRegister, handleUpdate, getProduct, getProductCoffee, getProductTea } = require('../controllers/homeControllers');
+const { getHomePage, handleLogin, handleRegister, handleUpdate, getProduct, getProductCoffee, getProductTea, getProductOther } = require('../controllers/homeControllers');
 
 
 const express = require('express');
@@ -11,4 +11,5 @@ router.post('/api/update', handleUpdate);
 router.get('/api/products/:id', getProduct);
 router.get('/api/getProductCoffee', getProductCoffee);
 router.get('/api/getProductTea', getProductTea);
+router.get('/api/getProductOther', getProductOther);
 module.exports = router;    
