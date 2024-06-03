@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The Coffee House - Sản Phẩm Cà Phê</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Sản Phẩm Cà Phê</title>
 
         <!-- Favicon -->
         <link
@@ -33,27 +34,46 @@
         <!-- Styles -->
         <link rel="stylesheet" href="../assets/css/main.css" />
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/GetCoffeeProducts.js" defer></script>
-        <script src="../assets/js/scripts.js"></script>
-    </head>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/GetCoffeeProducts.js" defer></script>
+    <script src="../assets/js/scripts.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "../templates/tea-header.html");
+    </script>
 
-    <body>
-        <!-- Header -->
-        <header id="header" class="header"></header>
-        <script>
-            load("#header", "../templates/header-logined.html");
-        </script>
+    <!-- Main -->
+    <div class="container coffee">
+        <section class="coffee__container">
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
 
-        <!-- Main -->
-        <div class="container coffee">
-            <section class="coffee__container">
-                <div class="row row-cols-4 row-cols-md-1">
-                    <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
-                </div>
-            </section>
-        </div>
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
+
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
+            <div class="row row-cols-4 row-cols-md-1">
+                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+            </div>
+        </section>
+    </div>
 
         <!-- Footer -->
         <footer id="footer"></footer>

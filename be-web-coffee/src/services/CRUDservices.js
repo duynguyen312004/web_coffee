@@ -13,13 +13,60 @@ const getAllProduct = async () => {
 }
 
 
+const handleAdminLogin = async (sdt, password) => {
+    return new Promise(async (resolve, reject) => {
+        let response = {};
+        try {
+            let exist = await checkAdminSdt(sdt);
+            if (exist) {
+                const result = await pool.query('SELECT * FROM admin WHERE phone = $1', [sdt]);
+                if (result.rows.length > 0) {
+                    let admin = result.rows[0];
+                    if (admin.password === password) {
+                        response.errCode = 0;
+                        response.errMessage = "OK";
+                        response.data = admin;
+                    } else {
+                        response.errCode = 3;
+                        response.errMessage = "Wrong Password";
+                    }
+                }
+                else {
+                    response.errCode = 2;
+                    response.errMessage = "Your Phone doesn't exist"
+                }
+            } else {
+                response.errCode = 2;
+                response.errMessage = "Your phone doesn't exist.";
+            }
+            resolve(response);
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+const checkAdminSdt = async (sdt) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // Sửa query để trả về kết quả đúng định dạng
+            const result = await pool.query('SELECT * FROM admin WHERE phone = $1', [sdt]);
+            if (result.rows.length > 0) resolve(true);
+            else resolve(false);
+        } catch (e) {
+            console.error('Error in checkCusSdt:', e); // Log the error
+            reject(e);
+        }
+    });
+}
+
 const handleCustomerLogin = async (sdt, password) => {
     return new Promise(async (resolve, reject) => {
         let response = {};
         try {
             let exist = await checkCusSdt(sdt);
             if (exist) {
-                const result = await pool.query('SELECT id, phone, password, wallet, address, name FROM customer WHERE phone = $1', [sdt]);
+                const result = await pool.query('SELECT * FROM customer WHERE phone = $1', [sdt]);
                 if (result.rows.length > 0) {
                     let customer = result.rows[0];
                     if (customer.password === password) {
@@ -133,14 +180,25 @@ const getProductTeaInfor = async () => {
     }
 }
 
+const getProductOtherInfor = async () => {
+    try {
+        let res = await pool.query("SELECT * FROM product WHERE category NOT ILIKE '%Cà Phê%' AND category NOT ILIKE '%Trà%'");
+        return res.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
 
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
+    handleAdminLogin,
     handleCusRegister,
     handleUpdateCus,
     saveImageToDatabase,
     getProductInfor,
     getProductCoffeeInfor,
-    getProductTeaInfor
+    getProductTeaInfor,
+    getProductOtherInfor
 }
