@@ -113,11 +113,34 @@ const getProductInfor = async (productId) => {
     }
 }
 
+const getProductCoffeeInfor = async () => {
+    try {
+        let res = await pool.query("SELECT * FROM product WHERE category ILIKE '%Cà Phê%'");
+        return res.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
+
+const getProductTeaInfor = async () => {
+    try {
+        let res = await pool.query("SELECT * FROM product WHERE category ILIKE '%Trà%'");
+        return res.rows;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}
+
+
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
     handleCusRegister,
     handleUpdateCus,
     saveImageToDatabase,
-    getProductInfor
+    getProductInfor,
+    getProductCoffeeInfor,
+    getProductTeaInfor
 }
