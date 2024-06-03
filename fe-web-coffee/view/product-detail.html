@@ -1,213 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>The Coffee House</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Coffee House</title>
+        <!-- Favicon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../assets/favicon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../assets/favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="../assets/favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Font -->
+        <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
 
-    <!-- Font -->
-    <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
+        <!-- Styles -->
+        <link rel="stylesheet" href="../assets/css/main.css" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="../assets/css/main.css" />
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../js/Product-detail.js" defer></script>
+        <script src="../assets/js/scripts.js"></script>
+    </head>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../js/Product-detail.js" defer></script>
-    <script src="../assets/js/scripts.js"></script>
-</head>
+    <body>
+        <!-- Header -->
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "../templates/header-logined.html");
+        </script>
 
-<body>
-    <!-- Header -->
-    <header id="header" class="header"></header>
-    <script>
-        load("#header", "../templates/header-logined.html");
-    </script>
-
-    <main class="product-page">
-        <div class="container">
-            <!-- Product info -->
-            <div class="product-container prod-info-content">
-                <div class="row">
-                    <div class="col-6 col-xl-6 col-lg-12">
-                        <div class="prod-preview">
-                            <div class="prod-preview__list">
-                                <div class="prod-preview__item">
-                                    <img src="" alt="" class="prod-preview__img" />
+        <main class="product-page">
+            <div class="container">
+                <!-- Product info -->
+                <div class="product-container prod-info-content">
+                    <div class="row">
+                        <div class="col-6 col-xl-6 col-lg-12">
+                            <div class="prod-preview">
+                                <div class="prod-preview__list">
+                                    <div class="prod-preview__item">
+                                        <img
+                                            src=""
+                                            alt=""
+                                            class="prod-preview__img"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-xl-6 col-lg-12">
-                        <form action="" class="form">
-                            <section class="prod-info">
-                                <h1 class="prod-info__heading"></h1>
-                                <p class="prod-info__price"></p>
+                        <div class="col-6 col-xl-6 col-lg-12">
+                            <form action="" class="form">
+                                <section class="prod-info">
+                                    <h1 class="prod-info__heading"></h1>
+                                    <p class="prod-info__price"></p>
 
-                                <!-- Size -->
-                                <div class="prod-infor__size">
-                                    <p class="size-desc">
-                                        Chọn size (bắt buộc)
-                                    </p>
-                                    <div class="size-options">
-                                        <div class="small btn">
-                                            <p class="size-text">
-                                                Nhỏ + 0 đ
-                                            </p>
-                                        </div>
-                                        <div class="medium btn">
-                                            <p class="size-text">
-                                                Vừa + 10.000 đ
-                                            </p>
-                                        </div>
-                                        <div class="large btn">
-                                            <p class="size-text">
-                                                Lớn + 16.000 đ
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Topping -->
-                                <div class="prod-infor__size">
-                                    <p class="size-desc">Topping</p>
-                                    <div class="topping-options">
-                                        <div class="small btn">
-                                            <p class="size-text">
-                                                Shot Espresso + 10.000 đ
-                                            </p>
-                                        </div>
-                                        <div class="medium btn">
-                                            <p class="size-text">
-                                                Trân châu trắng + 10.000 đ
-                                            </p>
+                                    <!-- Size -->
+                                    <div class="prod-infor__size">
+                                        <p class="size-desc">
+                                            Chọn size (bắt buộc)
+                                        </p>
+                                        <div class="size-options">
+                                            <div class="small btn">
+                                                <p class="size-text">
+                                                    Nhỏ + 0 đ
+                                                </p>
+                                            </div>
+                                            <div class="medium btn">
+                                                <p class="size-text">
+                                                    Vừa + 10.000 đ
+                                                </p>
+                                            </div>
+                                            <div class="large btn">
+                                                <p class="size-text">
+                                                    Lớn + 16.000 đ
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="topping-options">
-                                        <div class="large btn">
-                                            <p class="size-text">
-                                                Sốt caramel + 10.000 đ
-                                            </p>
+
+                                    <!-- Topping -->
+                                    <div class="prod-infor__size">
+                                        <p class="size-desc">Topping</p>
+                                        <div class="topping-options">
+                                            <div class="small btn">
+                                                <p class="size-text">
+                                                    Shot Espresso + 10.000 đ
+                                                </p>
+                                            </div>
+                                            <div class="medium btn">
+                                                <p class="size-text">
+                                                    Trân châu trắng + 10.000 đ
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="topping-options">
+                                            <div class="large btn">
+                                                <p class="size-text">
+                                                    Sốt caramel + 10.000 đ
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Add to cart -->
-                                <a href="./checkout.html" class="add-to-cart btn btn--primary"
-                                    style="background: #e57905; color: #fff">Thêm vào giỏ hàng</a>
-                            </section>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Product description -->
-                <div class="product-desc">
-                    <h2 class="product-desc__title">Mô tả sản phẩm</h2>
-                    <p class="prduct-desc__detail">
-                    </p>
-                </div>
-
-                <!-- Relevant products -->
-                <!-- Relevant products -->
-                <div class="rlv-product">
-                    <p class="rlv-product__title">Sản phẩm liên quan</p>
-                    <div class="row row-cols-6 row-cols-md-1">
-                        <div class="col">
-                            <img src="../assets/img/category-item-7.webp" alt="" class="rlv-product__img"
-                                data-product-id="31" />
-                            <a href="javascript:void(0);" class="rlv-product__name"
-                                onclick="redirectToProductDetail(31)">Hồng Trà Sữa Trân Châu</a>
-                            <p class="rlv-produc__price">55.000 đ</p>
-                        </div>
-
-                        <div class="col">
-                            <img src="../assets/img/category-item-8.webp" alt="" class="rlv-product__img"
-                                data-product-id="52" />
-                            <a href="javascript:void(0);" class="rlv-product__name"
-                                onclick="redirectToProductDetail(52)">Smoothie Phúc Bồn Tử Granola</a>
-                            <p class="rlv-produc__price">65.000 đ</p>
-                        </div>
-
-                        <div class="col">
-                            <img src="../assets/img/category-item-9.webp" alt="" class="rlv-product__img"
-                                data-product-id="75" />
-                            <a href="javascript:void(0);" class="rlv-product__name"
-                                onclick="redirectToProductDetail(75)">Cà Phê Đen Đá Túi (30 gói x 16g)</a>
-                            <p class="rlv-produc__price">116.000 đ</p>
-                        </div>
-
-                        <div class="col">
-                            <img src="../assets/img/category-item-10.webp" alt="" class="rlv-product__img"
-                                data-product-id="8" />
-                            <a href="javascript:void(0);" class="rlv-product__name"
-                                onclick="redirectToProductDetail(8)">Bạc Sỉu Nóng</a>
-                            <p class="rlv-produc__price">39.000 đ</p>
-                        </div>
-
-                        <div class="col">
-                            <img src="../assets/img/category-item-11.webp" alt="" class="rlv-product__img"
-                                data-product-id="54" />
-                            <a href="javascript:void(0);" class="rlv-product__name"
-                                onclick="redirectToProductDetail(54)">Frosty Cà Phê Đường Đen</a>
-                            <p class="rlv-produc__price">59.000 đ</p>
-                        </div>
-                        <div class="col">
-                            <img src="../assets/img/category-item-12.webp" alt="" class="rlv-product__img"
-                                data-product-id="77" />
-                            <a href="javascript:void(0);" class="rlv-product__name"
-                                onclick="redirectToProductDetail(77)">Cà Phê Sữa Đá Hòa Tan Túi 25x22G</a>
-                            <p class="rlv-produc__price">114.000 đ</p>
+                                    <!-- Add to cart -->
+                                    <a
+                                        href="./checkout.html"
+                                        class="add-to-cart btn btn--primary"
+                                        style="background: #e57905; color: #fff"
+                                        >Thêm vào giỏ hàng</a
+                                    >
+                                </section>
+                            </form>
                         </div>
                     </div>
-                </div>
 
+                    <!-- Product description -->
+                    <div class="product-desc">
+                        <h2 class="product-desc__title">Mô tả sản phẩm</h2>
+                        <p class="prduct-desc__detail"></p>
+                    </div>
+
+                    <!-- Relevant products -->
+                    <!-- Relevant products -->
+                    <div class="rlv-product">
+                        <p class="rlv-product__title">Sản phẩm liên quan</p>
+                        <div class="row row-cols-6 row-cols-md-1">
+                            <div class="col">
+                                <img
+                                    src="../assets/img/category-item-7.webp"
+                                    alt=""
+                                    class="rlv-product__img"
+                                    data-product-id="31"
+                                />
+                                <a
+                                    href="javascript:void(0);"
+                                    class="rlv-product__name"
+                                    onclick="redirectToProductDetail(31)"
+                                    >Hồng Trà Sữa Trân Châu</a
+                                >
+                                <p class="rlv-produc__price">55.000 đ</p>
+                            </div>
+
+                            <div class="col">
+                                <img
+                                    src="../assets/img/category-item-8.webp"
+                                    alt=""
+                                    class="rlv-product__img"
+                                    data-product-id="52"
+                                />
+                                <a
+                                    href="javascript:void(0);"
+                                    class="rlv-product__name"
+                                    onclick="redirectToProductDetail(52)"
+                                    >Smoothie Phúc Bồn Tử Granola</a
+                                >
+                                <p class="rlv-produc__price">65.000 đ</p>
+                            </div>
+
+                            <div class="col">
+                                <img
+                                    src="../assets/img/category-item-9.webp"
+                                    alt=""
+                                    class="rlv-product__img"
+                                    data-product-id="75"
+                                />
+                                <a
+                                    href="javascript:void(0);"
+                                    class="rlv-product__name"
+                                    onclick="redirectToProductDetail(75)"
+                                    >Cà Phê Đen Đá Túi (30 gói x 16g)</a
+                                >
+                                <p class="rlv-produc__price">116.000 đ</p>
+                            </div>
+
+                            <div class="col">
+                                <img
+                                    src="../assets/img/category-item-10.webp"
+                                    alt=""
+                                    class="rlv-product__img"
+                                    data-product-id="8"
+                                />
+                                <a
+                                    href="javascript:void(0);"
+                                    class="rlv-product__name"
+                                    onclick="redirectToProductDetail(8)"
+                                    >Bạc Sỉu Nóng</a
+                                >
+                                <p class="rlv-produc__price">39.000 đ</p>
+                            </div>
+
+                            <div class="col">
+                                <img
+                                    src="../assets/img/category-item-11.webp"
+                                    alt=""
+                                    class="rlv-product__img"
+                                    data-product-id="54"
+                                />
+                                <a
+                                    href="javascript:void(0);"
+                                    class="rlv-product__name"
+                                    onclick="redirectToProductDetail(54)"
+                                    >Frosty Cà Phê Đường Đen</a
+                                >
+                                <p class="rlv-produc__price">59.000 đ</p>
+                            </div>
+                            <div class="col">
+                                <img
+                                    src="../assets/img/category-item-12.webp"
+                                    alt=""
+                                    class="rlv-product__img"
+                                    data-product-id="77"
+                                />
+                                <a
+                                    href="javascript:void(0);"
+                                    class="rlv-product__name"
+                                    onclick="redirectToProductDetail(77)"
+                                    >Cà Phê Sữa Đá Hòa Tan Túi 25x22G</a
+                                >
+                                <p class="rlv-produc__price">114.000 đ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
 
-    <script>
-        function setupButtonClick(containerClass) {
-            const buttons = document.querySelectorAll(
-                `.${containerClass} .btn`
-            );
+        <script>
+            function setupButtonClick(containerClass) {
+                const buttons = document.querySelectorAll(
+                    `.${containerClass} .btn`
+                );
 
-            buttons.forEach((button) => {
-                button.addEventListener("click", function () {
-                    buttons.forEach((btn) => {
-                        btn.style.backgroundColor = "";
-                        btn.style.color = "";
-                        btn.querySelectorAll("*").forEach((child) => {
-                            child.style.color = "";
+                buttons.forEach((button) => {
+                    button.addEventListener("click", function () {
+                        buttons.forEach((btn) => {
+                            btn.style.backgroundColor = "";
+                            btn.style.color = "";
+                            btn.querySelectorAll("*").forEach((child) => {
+                                child.style.color = "";
+                            });
+                        });
+
+                        this.style.backgroundColor = "#e57905";
+                        this.style.color = "#fff";
+                        this.querySelectorAll("*").forEach((child) => {
+                            child.style.color = "#fff";
                         });
                     });
-
-                    this.style.backgroundColor = "#e57905";
-                    this.style.color = "#fff";
-                    this.querySelectorAll("*").forEach((child) => {
-                        child.style.color = "#fff";
-                    });
                 });
-            });
-        }
+            }
 
-        setupButtonClick("size-options");
-        setupButtonClick("topping-options");
-    </script>
+            setupButtonClick("size-options");
+            setupButtonClick("topping-options");
+        </script>
 
-    <!-- Footer -->
-    <footer id="footer"></footer>
-    <script>
-        load("#footer", "../templates/footer-logined.html");
-    </script>
-</body>
-
+        <!-- Footer -->
+        <footer id="footer"></footer>
+        <script>
+            load("#footer", "../templates/footer.html");
+        </script>
+    </body>
 </html>
