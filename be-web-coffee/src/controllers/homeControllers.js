@@ -4,7 +4,8 @@ const pool = require('../config/database');
 const { getAllProduct, handleCustomerLogin,
     handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor,
     getProductCoffeeInfor, getProductTeaInfor,
-    getProductOtherInfor, handleAdminLogin, deleteProduct, deleteImageFile } = require('../services/CRUDservices');
+    getProductOtherInfor, handleAdminLogin, deleteProduct, deleteImageFile,
+    createOrderService, getCustomerById } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -258,6 +259,24 @@ const handleDeleteProduct = async (req, res) => {
     }
 }
 
+const createOrder = async (req, res) => {
+    const { customerId, items, receiverPhone, receiverAddress, receiverName } = req.body;
+    try {
+        await createOrderService(customerId, items, receiverPhone, receiverAddress, receiverName);
+        const customer = await getCustomerById(customerId);
+        return res.status(200).json({ message: "Đặt hàng thành công!", customer });
+    } catch (error) {
+        console.log("Đặt hàng thất bại: ", error);
+        if (error.message.includes('Số dư ví không đủ') || error.message.includes('Không đủ tồn kho cho sản phẩm')) {
+            return res.status(400).json({
+                message: error.message
+            })
+        } else {
+            return res.status(500).json({ message: "Đặt hàng thất bại" });
+        }
+    }
+}
+
 module.exports = {
     getHomePage,
     handleLogin,
@@ -268,5 +287,6 @@ module.exports = {
     getProductCoffee,
     getProductTea,
     getProductOther,
-    handleDeleteProduct
+    handleDeleteProduct,
+    createOrder
 }

@@ -214,6 +214,51 @@ const deleteImageFile = async (filePath) => {
     }
 }
 
+const getCustomerById = async (customerId) => {
+    try {
+        let result = await pool.query("SELECT * FROM customer WHERE id = $1", [customerId]);
+        return result.rows[0];
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+const createOrderService = async (customerId, items, receiverPhone, receiverAddress, receiverName) => {
+    const client = await pool.connect();
+    const shippingFee = 15; // phí ship 15000đ
+    try {
+        await client.query('BEGIN');
+        const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee;
+
+        const orderResult = await client.query(
+            `INSERT INTO "order" (date, total_price, customerid, receiver_phone, receiver_address, receiver_name)
+             VALUES (NOW(), $1, $2, $3, $4, $5) RETURNING id`,
+            [totalPrice, customerId, receiverPhone, receiverAddress, receiverName]
+        );
+        const orderId = orderResult.rows[0].id;
+        //Thêm chi tiết đơn hàng
+        for (const item of items) {
+            await client.query(
+                `INSERT INTO order_detail (unit_price, quantity, orderid, productid)
+                 VALUES ($1, $2, $3, $4)`,
+                [item.price, item.quantity, orderId, item.id]
+            );
+            // Cập nhật tồn kho sản phẩm (trigger trg_check_inventory sẽ kiểm tra tồn kho)
+        }
+        // Cập nhật số dư ví của khách hàng (trigger trg_deduct_wallet_after_order sẽ thực hiện điều này)
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        if (error.code === 'P0001') {
+            throw new Error(error.message);
+        } else {
+            throw error;
+        }
+    } finally {
+        client.release();
+    }
+}
+
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
@@ -226,5 +271,7 @@ module.exports = {
     getProductTeaInfor,
     getProductOtherInfor,
     deleteProduct,
-    deleteImageFile
+    deleteImageFile,
+    createOrderService,
+    getCustomerById
 }

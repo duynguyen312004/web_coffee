@@ -1,231 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The Coffee House</title>
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="../assets/favicon/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="../assets/favicon/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="../assets/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="../assets/favicon/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-        <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/Product-detail.js" defer></script>
-        <script src="../js/CheckOut.js" defer></script>
-        <script src="../assets/js/scripts.js"></script>
-    </head>
 
-    <body>
-        <header id="header" class="header"></header>
-        <script>
-            load("#header", "../templates/header-logined.html");
-        </script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Coffee House</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/Product-detail.js" defer></script>
+    <script src="../js/CheckOut.js" defer></script>
+    <script src="../assets/js/scripts.js"></script>
+</head>
 
-        <div class="checkout">
-            <div class="container">
-                <div class="checkout-container">
-                    <div class="row">
-                        <!-- Products in cart -->
-                        <div class="col-8">
-                            <div class="checkout-info">
-                                <h2 class="user-info__title">
-                                    Các món đã chọn
-                                </h2>
+<body>
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "../templates/header-logined.html");
+    </script>
+
+    <div class="checkout">
+        <div class="container">
+            <div class="checkout-container">
+                <div class="row">
+                    <!-- Products in cart -->
+                    <div class="col-8">
+                        <div class="checkout-info">
+                            <h2 class="user-info__title">
+                                Các món đã chọn
+                            </h2>
+                        </div>
+                        <div class="cart-info">
+                            <div class="cart-info__list">
+                                <!-- Sản phẩm trong giỏ hàng sẽ được thêm vào đây -->
                             </div>
-                            <div class="cart-info">
-                                <div class="cart-info__list">
-                                    <!-- Sản phẩm trong giỏ hàng sẽ được thêm vào đây -->
-                                </div>
-                                <div class="cart-info__bottom d-md-none">
-                                    <div class="row">
-                                        <div class="col-8 col-xxl-7">
-                                            <div class="cart-info__continue">
-                                                <a
-                                                    href="../view/index-logined.html"
-                                                    class="cart-info__continue-link btn btn--primary"
-                                                >
-                                                    Tiếp tục mua hàng
-                                                </a>
-                                            </div>
+                            <div class="cart-info__bottom d-md-none">
+                                <div class="row">
+                                    <div class="col-8 col-xxl-7">
+                                        <div class="cart-info__continue">
+                                            <a href="../view/index-logined.html"
+                                                class="cart-info__continue-link btn btn--primary">
+                                                Tiếp tục mua hàng
+                                            </a>
                                         </div>
-                                        <div
-                                            class="col-4 col-xxl-5 total-price__border"
-                                        >
-                                            <div class="cart-info__row">
-                                                <span>Tổng:</span>
-                                                <span id="total-price"
-                                                    >0 đ</span
-                                                >
-                                            </div>
-                                            <div class="cart-info__row">
-                                                <span>Vận chuyển:</span>
-                                                <span>15.000 đ</span>
-                                            </div>
-                                            <div
-                                                class="cart-info__separate"
-                                            ></div>
-                                            <div
-                                                class="cart-info__row cart-info__row--bold"
-                                            >
-                                                <span>Tổng:</span>
-                                                <span id="final-price"
-                                                    >15.000 đ</span
-                                                >
-                                            </div>
+                                    </div>
+                                    <div class="col-4 col-xxl-5 total-price__border">
+                                        <div class="cart-info__row">
+                                            <span>Tổng:</span>
+                                            <span id="total-price">0 đ</span>
+                                        </div>
+                                        <div class="cart-info__row">
+                                            <span>Vận chuyển:</span>
+                                            <span>15.000 đ</span>
+                                        </div>
+                                        <div class="cart-info__separate"></div>
+                                        <div class="cart-info__row cart-info__row--bold">
+                                            <span>Tổng:</span>
+                                            <span id="final-price">15.000 đ</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Checkout -->
-                        <div class="col-4">
-                            <div class="checkout-info">
-                                <h2 class="user-info__title">
-                                    Xác nhận giao hàng
-                                </h2>
-                            </div>
-                            <div class="cart-info">
-                                <form action="" class="form">
-                                    <h3 class="user-info__heading">
-                                        Người nhận hàng
-                                    </h3>
+                    <!-- Checkout -->
+                    <div class="col-4">
+                        <div class="checkout-info">
+                            <h2 class="user-info__title">
+                                Xác nhận giao hàng
+                            </h2>
+                        </div>
+                        <div class="cart-info">
+                            <form action="" class="form" id="order-form">
+                                <h3 class="user-info__heading">
+                                    Người nhận hàng
+                                </h3>
 
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form__group">
-                                                <div
-                                                    class="form__text-input form__profile"
-                                                >
-                                                    <input
-                                                        type="text"
-                                                        name=""
-                                                        id="full-name"
-                                                        placeholder="Họ và tên"
-                                                        class="form__input"
-                                                        required=""
-                                                    />
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                        class="form__input-icon"
-                                                    />
-                                                </div>
-                                                <p class="form__error"></p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form__group">
+                                            <div class="form__text-input form__profile">
+                                                <input type="text" name="" id="full-name" placeholder="Họ và tên"
+                                                    class="form__input" required="" />
+                                                <img src="" alt="" class="form__input-icon" />
+                                            </div>
+                                            <p class="form__error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="user-info__heading">
+                                    Số điện thoại người nhận
+                                </h3>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="form__group">
+                                            <div class="form__text-input form__profile">
+                                                <input type="text" name="" id="phone" placeholder="Số điện thoại"
+                                                    class="form__input" />
+                                                <img src="" alt="" class="form__input-icon" />
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <h3 class="user-info__heading">
-                                        Số điện thoại người nhận
-                                    </h3>
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <div class="form__group">
-                                                <div
-                                                    class="form__text-input form__profile"
-                                                >
-                                                    <input
-                                                        type="number"
-                                                        name=""
-                                                        id="phone"
-                                                        placeholder="Số điện thoại"
-                                                        class="form__input"
-                                                        readonly=""
-                                                    />
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                        class="form__input-icon"
-                                                    />
-                                                </div>
+                                <h3 class="user-info__heading">
+                                    Địa chỉ nhận hàng
+                                </h3>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="form__group">
+                                            <div class="form__text-input form__profile">
+                                                <textarea id="address" placeholder="Địa chỉ" class="form__input"
+                                                    rows="1"></textarea>
+                                                <img src="" alt="" class="form__input-icon" />
                                             </div>
                                         </div>
                                     </div>
-
-                                    <h3 class="user-info__heading">
-                                        Địa chỉ nhận hàng
-                                    </h3>
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <div class="form__group">
-                                                <div
-                                                    class="form__text-input form__profile"
-                                                >
-                                                    <textarea
-                                                        id="address"
-                                                        placeholder="Địa chỉ"
-                                                        class="form__input"
-                                                        rows="1"
-                                                    ></textarea>
-                                                    <img
-                                                        src=""
-                                                        alt=""
-                                                        class="form__input-icon"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <script>
-                                        document.addEventListener(
-                                            "DOMContentLoaded",
-                                            function () {
-                                                const textarea =
-                                                    document.getElementById(
-                                                        "address"
-                                                    );
-
-                                                textarea.addEventListener(
-                                                    "input",
-                                                    function () {
-                                                        this.style.height =
-                                                            "auto"; // Reset height to calculate the new height correctly
-                                                        this.style.height =
-                                                            this.scrollHeight +
-                                                            "px"; // Set new height based on scrollHeight
-                                                    }
+                                </div>
+                                <script>
+                                    document.addEventListener(
+                                        "DOMContentLoaded",
+                                        function () {
+                                            const textarea =
+                                                document.getElementById(
+                                                    "address"
                                                 );
-                                            }
-                                        );
-                                    </script>
 
-                                    <div class="cart-info__checkout">
-                                        <a
-                                            href=""
-                                            class="cart-info__checkout-link btn btn--primary"
-                                        >
-                                            Thanh toán & giao hàng
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
+                                            textarea.addEventListener(
+                                                "input",
+                                                function () {
+                                                    this.style.height =
+                                                        "auto"; // Reset height to calculate the new height correctly
+                                                    this.style.height =
+                                                        this.scrollHeight +
+                                                        "px"; // Set new height based on scrollHeight
+                                                }
+                                            );
+                                        }
+                                    );
+                                </script>
+
+                                <div class="cart-info__checkout">
+                                    <button type="button" class="cart-info__checkout-link btn btn--primary"
+                                        onclick="placeOrder()">
+                                        Thanh toán & giao hàng
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <footer id="footer"></footer>
-        <script>
-            load("#footer", "../templates/footer.html");
-        </script>
-    </body>
+    <footer id="footer"></footer>
+    <script>
+        load("#footer", "../templates/footer.html");
+    </script>
+</body>
+
 </html>

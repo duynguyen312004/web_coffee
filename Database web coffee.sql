@@ -1,7 +1,7 @@
 
 CREATE TABLE customer (
     id serial PRIMARY KEY,
-    wallet numeric(10, 2) NOT NULL DEFAULT 0,
+    wallet numeric(10, 2) NOT NULL DEFAULT 1000000,
     phone varchar(20) NOT NULL UNIQUE,
     password varchar(50) NOT NULL,
     address varchar(100) NOT NULL,
@@ -50,12 +50,16 @@ CREATE OR REPLACE FUNCTION calculate_total_price(order_id INT)
 RETURNS NUMERIC AS $$
 DECLARE
     total NUMERIC(10, 2);
+    shipping_fee NUMERIC(10, 2) := 15; -- Phí ship cố định 15.000 đ
 BEGIN
     SELECT SUM(unit_price * quantity) INTO total
     FROM order_detail
     WHERE orderid = order_id;
-    RETURN total;
+
+    RETURN total + shipping_fee;
 END;
+$$ LANGUAGE plpgsql;
+
 $$ LANGUAGE plpgsql;
 2.Hàm cập nhật tồn kho sản phẩm:
 CREATE OR REPLACE FUNCTION update_inventory(product_id INT, quantity INT)
@@ -81,24 +85,32 @@ CREATE TRIGGER trg_update_order_total_price
 AFTER INSERT OR UPDATE ON order_detail
 FOR EACH ROW
 EXECUTE FUNCTION update_order_total_price();
+
 4.Trigger để kiểm tra số lượng tồn kho trước khi thêm order_detail:
 CREATE OR REPLACE FUNCTION check_inventory()
 RETURNS TRIGGER AS $$
+DECLARE
+    product_name VARCHAR;
 BEGIN
+    -- Lấy tên sản phẩm từ bảng product
+    SELECT name INTO product_name
+    FROM product
+    WHERE id = NEW.productid;
+
+    -- Kiểm tra tồn kho và raise exception nếu không đủ
     IF (SELECT inventory FROM product WHERE id = NEW.productid) < NEW.quantity THEN
-        RAISE EXCEPTION 'Không đủ tồn kho cho sản phẩm %', NEW.productid;
+        RAISE EXCEPTION 'Không đủ tồn kho cho sản phẩm %', product_name;
     END IF;
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trg_check_inventory
 BEFORE INSERT OR UPDATE ON order_detail
-
-
-
 FOR EACH ROW
 EXECUTE FUNCTION check_inventory();
+
 5.Hàm để kiểm tra số lượng tồn kho trước khi xóa chi tiết đơn hàng:
 CREATE OR REPLACE FUNCTION restore_inventory(product_id INT, quantity INT)
 RETURNS VOID AS $$
@@ -171,6 +183,29 @@ CREATE TRIGGER trg_restore_wallet_after_order_cancel
 AFTER DELETE ON "order"
 FOR EACH ROW
 EXECUTE FUNCTION restore_wallet_after_order_cancel();
+11.kiểm tra số dư ví:
+CREATE OR REPLACE FUNCTION check_wallet_balance()
+RETURNS TRIGGER AS $$
+DECLARE
+    wallet_balance NUMERIC(10, 2);
+BEGIN
+    -- Lấy số dư ví của khách hàng
+    SELECT wallet INTO wallet_balance
+    FROM customer
+    WHERE id = NEW.customerid;
+
+    -- Kiểm tra nếu số dư ví không đủ
+    IF wallet_balance < NEW.total_price THEN
+        RAISE EXCEPTION 'Số dư ví không đủ để thanh toán đơn hàng. Còn thiếu % VNĐ', NEW.total_price - wallet_balance;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER trg_check_wallet_balance
+BEFORE INSERT ON "order"
+FOR EACH ROW
+EXECUTE FUNCTION check_wallet_balance();
 
 
 INSERT INTO customer (wallet, phone, name, address, password) VALUES
