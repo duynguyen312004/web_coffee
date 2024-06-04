@@ -2816,8 +2816,11 @@ a.profile-menu__link:hover {
 }
 
 .main__navbar {
-  padding: 20px;
+  padding: 5px 30px;
   background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .main__search {
   display: flex;
@@ -2866,6 +2869,12 @@ a.profile-menu__link:hover {
 }
 .order .btn.active .order__text {
   color: #fff;
+}
+
+.dropdown__admin {
+  width: 150px;
+  left: -80px;
+  cursor: pointer;
 }
 
 .choose-coffee {
