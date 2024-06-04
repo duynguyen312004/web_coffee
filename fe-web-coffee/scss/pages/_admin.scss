@@ -1,0 +1,119 @@
+@use "../abstracts";
+
+.admin__choose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #929292;
+}
+
+.row__admin {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+.order {
+    margin-top: 0;
+}
+
+.sidebar {
+    height: 100%;
+    background-color: rgba(244, 237, 224, 0.8);
+    padding: 10px;
+
+    &__title {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    &__content {
+        margin: 20px 0 0 10px;
+
+        &--list {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            height: 42px;
+            padding: 25px 25px;
+            border-radius: 5px;
+            color: #1a162e;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 146.667%;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+.main {
+    &__navbar {
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        width: 350px;
+        height: 30px;
+        border-radius: 5px;
+
+        &--icon {
+            margin: 10px;
+            width: 20px;
+        }
+
+        .form__input {
+            width: 300px;
+        }
+    }
+}
+
+.order {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    &-options {
+        display: flex;
+    }
+
+    &__title {
+        margin-right: 20px;
+    }
+
+    &__text {
+        font-size: 15px;
+    }
+
+    .btn {
+        width: 100px;
+        height: 30px;
+        border: 1px solid #ccc;
+        background-color: transparent;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &.active {
+            background-color: rgb(229, 121, 5);
+            color: #fff;
+
+            .order__text {
+                color: #fff;
+            }
+        }
+    }
+}
+
