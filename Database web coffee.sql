@@ -6,12 +6,14 @@ CREATE TABLE customer (
     password varchar(50) NOT NULL,
     address varchar(100) NOT NULL,
     name varchar(100) NOT NULL
+    role varchar(20) DEFAULT 'Customer'
 );
 CREATE TABLE admin (
     id serial PRIMARY KEY,
     phone varchar(100) NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
-    name varchar(100) NOT NULL
+    name varchar(100) NOT NULL,
+    role varchar(20) DEFAULT 'ADMIN'
 );
 
 

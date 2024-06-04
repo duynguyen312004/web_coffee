@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     loadCartDropdown();
     updateWallet();
     document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
+    const customerData = JSON.parse(sessionStorage.getItem('customer'));
+    if (customerData) {
+        document.getElementById('full-name').value = customerData.name;
+        document.getElementById('phone').value = customerData.phone;
+        document.getElementById('address').value = customerData.address;
+    }
 });
 
 function updateCartDisplay() {

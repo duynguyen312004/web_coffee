@@ -1,7 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor, getProductCoffeeInfor, getProductTeaInfor, getProductOtherInfor, handleAdminLogin } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin,
+    handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor,
+    getProductCoffeeInfor, getProductTeaInfor,
+    getProductOtherInfor, handleAdminLogin, deleteProduct, deleteImageFile } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -236,6 +239,25 @@ const getProductOther = async (req, res) => {
     }
 }
 
+const handleDeleteProduct = async (req, res) => {
+    try {
+        let productId = req.params.id;
+        const product = await getProductInfor(productId);
+        if (product.length > 0) {
+            const imgFileName = imageFileMapping[productId];
+            const imgFilePath = path.join(__dirname, '..', 'img-database', imgFileName);
+
+            await deleteProduct(productId);
+            await deleteImageFile(imgFilePath);
+            return res.status(200).json({ message: "Product deleted successfully" });
+        } else {
+            return res.status(404).json({ message: "Cannot find product" });
+        }
+    } catch (e) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 module.exports = {
     getHomePage,
     handleLogin,
@@ -246,4 +268,5 @@ module.exports = {
     getProductCoffee,
     getProductTea,
     getProductOther,
+    handleDeleteProduct
 }

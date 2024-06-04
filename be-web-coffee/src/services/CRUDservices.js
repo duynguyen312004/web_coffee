@@ -190,6 +190,30 @@ const getProductOtherInfor = async () => {
     }
 }
 
+const deleteProduct = async (productId) => {
+    try {
+        await pool.query("DELETE FROM product WHERE id = $1", [productId]);
+        return {
+            errCode: 0,
+            message: "Deleted successfully"
+        };
+    } catch (e) {
+        console.log('Error deleting: ', e);
+        return {
+            errCode: 1,
+            message: "Error Deleting"
+        }
+    }
+}
+
+const deleteImageFile = async (filePath) => {
+    try {
+        await fs.unlinkSync(filePath);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
@@ -200,5 +224,7 @@ module.exports = {
     getProductInfor,
     getProductCoffeeInfor,
     getProductTeaInfor,
-    getProductOtherInfor
+    getProductOtherInfor,
+    deleteProduct,
+    deleteImageFile
 }
