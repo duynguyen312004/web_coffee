@@ -94,6 +94,9 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trg_check_inventory
 BEFORE INSERT OR UPDATE ON order_detail
+
+
+
 FOR EACH ROW
 EXECUTE FUNCTION check_inventory();
 5.Hàm để kiểm tra số lượng tồn kho trước khi xóa chi tiết đơn hàng:
