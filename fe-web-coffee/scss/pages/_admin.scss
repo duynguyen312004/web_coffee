@@ -20,9 +20,13 @@
 }
 
 .sidebar {
-    height: 100vh;
+    height: 100%;
     background-color: rgba(244, 237, 224, 0.8);
     padding: 10px;
+
+    &__admin {
+        height: 100vh;
+    }
 
     &__title {
         margin-top: 20px;
