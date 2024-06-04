@@ -20,7 +20,7 @@ CREATE TABLE admin (
 CREATE TABLE product (
     id serial PRIMARY KEY,
     name varchar(50) NOT NULL,
-    price numeric(10, 2) NOT NULL,
+    price int  NOT NULL,
     category varchar(50),
     inventory integer NOT NULL,
     img_path text,
@@ -30,14 +30,14 @@ CREATE TABLE product (
 CREATE TABLE "order" (
     id serial PRIMARY KEY,
     date timestamp NOT NULL,
-    total_price numeric(10, 2) NOT NULL,
+    total_price int  NOT NULL,
     customerid int NOT NULL,
     FOREIGN KEY (customerid) REFERENCES customer (id)
 );
 
 CREATE TABLE order_detail (
     id serial PRIMARY KEY,
-    unit_price numeric(10, 2) NOT NULL,
+    unit_price int  NOT NULL,
     quantity integer NOT NULL,
     orderid int NOT NULL,
     productid int NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE order_detail (
 
 1.Hàm tính tổng giá trị đơn hàng:
 CREATE OR REPLACE FUNCTION calculate_total_price(order_id INT)
-RETURNS NUMERIC AS $$
+RETURNS int  AS $$
 DECLARE
     total NUMERIC(10, 2);
     shipping_fee NUMERIC(10, 2) := 15; -- Phí ship cố định 15.000 đ

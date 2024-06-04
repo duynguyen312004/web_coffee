@@ -35,13 +35,13 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/getAdminCoffee.js" defer></script>
+        <script src="../js/getAdminOther.js" defer></script>
         <script src="../assets/js/scripts.js"></script>
     </head>
 
     <body>
         <!-- Header -->
-         <!--<header id="header" class="header"></header>
+        <!-- <header id="header" class="header"></header>
         <script>
             load("#header", "../templates/header-logined.html");
         </script> -->
@@ -62,7 +62,7 @@
                             <a
                                 href="./admin-coffee.html"
                                 class="sidebar__content--list"
-                                ><p class="choose-coffee">Cà phê</p></a
+                                >Cà phê</a
                             >
                         </li>
                         <li>
@@ -76,7 +76,7 @@
                             <a
                                 href="./admin-others.html"
                                 class="sidebar__content--list"
-                                >Sản phẩm khác</a
+                                ><p class="choose-others">Sản phẩm khác</p></a
                             >
                         </li>
                     </ul>
@@ -139,9 +139,7 @@
                     <button class="add-new-products-btn">
                         <p class="add__text">Thêm sản phẩm</p>
                     </button>
-
                 </div>
-
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
                         const buttons = document.querySelectorAll(
@@ -161,60 +159,53 @@
                         });
                     });
                 </script>
-
-                
-
-                <!-- Add new products -->
-        
-
-                <div class="list"></div>
+               <div class="list"></div>
                 <!-- Products list -->
-                
-                    <div class="container coffee">
-                        <section class="coffee__container">
-                            <div class="row row-cols-1 row-cols-md-1">
-                                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
-                            </div>
-                        </section>
-                    </div>
-                    <!-- Coffee -->
-                    <!-- <section class="list__coffee">
+                <div class="container menu">
+                    <section class="menu__container">
+                        <div class="row row-cols-1 row-cols-md-1">
+                            <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+                        </div>
+                    </section>
+                </div>
+                    <!-- Other products -->
+                   <!-- <section class="list__others">
                         <div
                             class="row row__admin col-12 row-cols-12 row-cols-md-1"
                         >
                             <div class="col-12">
-                                <div class="coffee-item">
+                                <div class="others-item">
                                     <a href="./product-detail.html?id=17">
                                         <img
-                                            src="../assets/img/category-item-1.webp"
+                                            src="../assets/img/category-item-14.webp"
                                             alt=""
-                                            class="coffee-item__thumb"
+                                            class="others-item__thumb"
                                         />
                                     </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
+                                    <div class="others-item__content">
+                                        <div class="others-item__content-left">
+                                            <h3 class="others-item__title">
                                                 <a
                                                     href="./product-detail.html?id=17"
                                                 >
-                                                    Americano Đá
+                                                    Chà Bông Phô Mai
                                                 </a>
                                             </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
+                                            <p class="others-item__price-wrap">
+                                                39.000 đ |
                                                 <span
-                                                    class="coffee-item__status"
+                                                    class="others-item__status"
                                                     >Còn hàng</span
                                                 >
                                             </p>
                                         </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
+                                        <div class="others-item__content-right">
+                                            <p class="others-item__total-price">
                                                 45.000 đ
                                             </p>
-                                            <div class="coffee-item__ctrl">
+                                            <div class="others-item__ctrl">
                                                 <button
-                                                    class="coffee-item__ctrl-btn"
+                                                    class="others-item__ctrl-btn"
                                                     onclick="removeFromCoffee(17)"
                                                 >
                                                     <img
@@ -236,38 +227,38 @@
                                     </div>
                                 </div>
 
-                                <div class="coffee-item">
+                                <div class="others-item">
                                     <a href="./product-detail.html?id=17">
                                         <img
-                                            src="../assets/img/category-item-1.webp"
+                                            src="../assets/img/category-item-14.webp"
                                             alt=""
-                                            class="coffee-item__thumb"
+                                            class="others-item__thumb"
                                         />
                                     </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
+                                    <div class="others-item__content">
+                                        <div class="others-item__content-left">
+                                            <h3 class="others-item__title">
                                                 <a
                                                     href="./product-detail.html?id=17"
                                                 >
-                                                    Americano Đá
+                                                    Chà Bông Phô Mai
                                                 </a>
                                             </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
+                                            <p class="others-item__price-wrap">
+                                                39.000 đ |
                                                 <span
-                                                    class="coffee-item__status"
+                                                    class="others-item__status"
                                                     >Còn hàng</span
                                                 >
                                             </p>
                                         </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
+                                        <div class="others-item__content-right">
+                                            <p class="others-item__total-price">
                                                 45.000 đ
                                             </p>
-                                            <div class="coffee-item__ctrl">
+                                            <div class="others-item__ctrl">
                                                 <button
-                                                    class="coffee-item__ctrl-btn"
+                                                    class="others-item__ctrl-btn"
                                                     onclick="removeFromCoffee(17)"
                                                 >
                                                     <img
@@ -289,91 +280,38 @@
                                     </div>
                                 </div>
 
-                                <div class="coffee-item">
+                                <div class="others-item">
                                     <a href="./product-detail.html?id=17">
                                         <img
-                                            src="../assets/img/category-item-1.webp"
+                                            src="../assets/img/category-item-14.webp"
                                             alt=""
-                                            class="coffee-item__thumb"
+                                            class="others-item__thumb"
                                         />
                                     </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
+                                    <div class="others-item__content">
+                                        <div class="others-item__content-left">
+                                            <h3 class="others-item__title">
                                                 <a
                                                     href="./product-detail.html?id=17"
                                                 >
-                                                    Americano Đá
+                                                    Chà Bông Phô Mai
                                                 </a>
                                             </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
+                                            <p class="others-item__price-wrap">
+                                                39.000 đ |
                                                 <span
-                                                    class="coffee-item__status"
+                                                    class="others-item__status"
                                                     >Còn hàng</span
                                                 >
                                             </p>
                                         </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
+                                        <div class="others-item__content-right">
+                                            <p class="others-item__total-price">
                                                 45.000 đ
                                             </p>
-                                            <div class="coffee-item__ctrl">
+                                            <div class="others-item__ctrl">
                                                 <button
-                                                    class="coffee-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
-                                                    />
-                                                </button>
-
-                                                <button
-                                                    class="coffee-item__edit-btn"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/edit.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="coffee-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-1.webp"
-                                            alt=""
-                                            class="coffee-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    Americano Đá
-                                                </a>
-                                            </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
-                                                <span
-                                                    class="coffee-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="coffee-item__ctrl">
-                                                <button
-                                                    class="coffee-item__ctrl-btn"
+                                                    class="others-item__ctrl-btn"
                                                     onclick="removeFromCoffee(17)"
                                                 >
                                                     <img
@@ -396,10 +334,10 @@
                                 </div>
                             </div>
                         </div>
-                    </section> 
-                
+                    </section>-->
+            </div> 
             </div>
-        </div> -->
+        </div>
 
         <!-- Footer -->
         <footer id="footer"></footer>

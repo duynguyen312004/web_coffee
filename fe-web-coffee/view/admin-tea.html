@@ -35,7 +35,7 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/GetProducts-logined.js" defer></script>
+        <script src="../js/getAdminTea.js" defer></script>
         <script src="../assets/js/scripts.js"></script>
     </head>
 
@@ -70,6 +70,13 @@
                                 href="./admin-tea.html"
                                 class="sidebar__content--list"
                                 ><p class="choose-tea">Trà</p></a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="./admin-others.html"
+                                class="sidebar__content--list"
+                                >Sản phẩm khác</a
                             >
                         </li>
                     </ul>
@@ -129,6 +136,10 @@
                             <p class="order__text">Giá giảm dần</p>
                         </div>
                     </div>
+                    <button class="add-new-products-btn">
+                        <p class="add__text">Thêm sản phẩm</p>
+                    </button>
+
                 </div>
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
@@ -152,8 +163,15 @@
 
                 <!-- Products list -->
                 <div class="list">
+                    <div class="container tea">
+                        <section class="tea__container">
+                            <div class="row row-cols-1 row-cols-md-1">
+                                <!-- Các sản phẩm trà sẽ được hiển thị tại đây -->
+                            </div>
+                        </section>
+                    </div>
                     <!-- Tea -->
-                    <section class="list__tea">
+                  <!-- <section class="list__tea"> 
                         <div
                             class="row row__admin col-12 row-cols-12 row-cols-md-1"
                         >
@@ -196,47 +214,13 @@
                                                         alt="Remove"
                                                     />
                                                 </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="tea-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-13.webp"
-                                            alt=""
-                                            class="tea-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="tea-item__content">
-                                        <div class="tea-item__content-left">
-                                            <h3 class="tea-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    CloudTea Trà Xanh Tây Bắc
-                                                </a>
-                                            </h3>
-                                            <p class="tea-item__price-wrap">
-                                                45.000 đ |
-                                                <span class="tea-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="tea-item__content-right">
-                                            <p class="tea-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="tea-item__ctrl">
                                                 <button
-                                                    class="tea-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
+                                                    class="coffee-item__edit-btn"
                                                 >
                                                     <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
+                                                        src="../assets/icons/edit.svg"
+                                                        alt=""
                                                     />
                                                 </button>
                                             </div>
@@ -282,90 +266,13 @@
                                                         alt="Remove"
                                                     />
                                                 </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="tea-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-13.webp"
-                                            alt=""
-                                            class="tea-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="tea-item__content">
-                                        <div class="tea-item__content-left">
-                                            <h3 class="tea-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    CloudTea Trà Xanh Tây Bắc
-                                                </a>
-                                            </h3>
-                                            <p class="tea-item__price-wrap">
-                                                45.000 đ |
-                                                <span class="tea-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="tea-item__content-right">
-                                            <p class="tea-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="tea-item__ctrl">
                                                 <button
-                                                    class="tea-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
+                                                    class="coffee-item__edit-btn"
                                                 >
                                                     <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tea-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-13.webp"
-                                            alt=""
-                                            class="tea-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="tea-item__content">
-                                        <div class="tea-item__content-left">
-                                            <h3 class="tea-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    CloudTea Trà Xanh Tây Bắc
-                                                </a>
-                                            </h3>
-                                            <p class="tea-item__price-wrap">
-                                                45.000 đ |
-                                                <span class="tea-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="tea-item__content-right">
-                                            <p class="tea-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="tea-item__ctrl">
-                                                <button
-                                                    class="tea-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
+                                                        src="../assets/icons/edit.svg"
+                                                        alt=""
                                                     />
                                                 </button>
                                             </div>
@@ -374,7 +281,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> -->
                 </div>
             </div>
         </div>

@@ -1,17 +1,17 @@
 @use "../abstracts";
 
-.choose-coffee {
+.choose-others {
     text-decoration: underline;
     font-weight: 600;
 }
 
 .list {
-    &__coffee {
+    &__others {
         padding: 10px 20px;
     }
 }
 
-.coffee-item {
+.others-item {
     display: flex;
     padding: 30px 10px 20px 10px;
     border-bottom: 1px solid #ccc;
@@ -171,13 +171,6 @@
         &:first-child {
             margin-right: 10px;
         }
-    }
-
-    &__edit-btn {
-        width: 35px;
-        height: 35px;
-        margin-right:100px;
-        margin-top: 5px;
     }
 
     &__checkout-btn {
