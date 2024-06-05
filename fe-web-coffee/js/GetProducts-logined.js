@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadCartDropdown();
     updateWallet();
-    document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
     // Gọi API để lấy danh sách sản phẩm
     axios
         .get("http://localhost:8080/api/products") // Thay URL bằng URL API thực tế của bạn
@@ -11,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
             renderProducts(products);
         })
         .catch((error) => console.error("Error fetching products:", error));
-    updateWallet();
 });
 
 function renderProducts(products) {
@@ -34,7 +32,7 @@ function renderProducts(products) {
 
         const productElement = `
             <div class="col">
-                <article class="cate-item" data-product-id = "${product.id}">
+                <article class="cate-item" data-product-id="${product.id}">
                     <img src="data:image/jpeg;base64,${product.img_path}" alt="${product.name}" class="cate-item__thumb" />
                     <section class="cate-item__info">
                         <a href="javascript:void(0);" class="cate-item__title">${product.name}</a>
@@ -52,19 +50,15 @@ function renderProducts(products) {
         productElement.addEventListener('click', function () {
             const productId = this.getAttribute('data-product-id');
             window.location.href = `../view/product-detail.html?id=${productId}`;
-        })
-    })
+        });
+    });
 }
 
 function updateWallet() {
     const customerData = JSON.parse(sessionStorage.getItem('customer'));
     if (customerData && customerData.wallet) {
-        document.getElementById('Wallet').textContent = "Ví của tôi: " + customerData.wallet + ' Đ';
+        document.getElementById('Wallet').textContent = "Ví của tôi: " + formatPrice(customerData.wallet) + ' đ';
     }
-}
-
-function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
 }
 
 function loadCartDropdown() {
@@ -93,8 +87,13 @@ function loadCartDropdown() {
         cartDropdown.appendChild(cartItem);
     });
 }
+
 function logout() {
     sessionStorage.clear();
     alert("Bạn đã đăng xuất thành công!");
     window.location.href = '../index.html'; // Redirect to home page after logout
+}
+
+function formatPrice(price) {
+    return parseInt(price).toLocaleString('vi-VN');
 }

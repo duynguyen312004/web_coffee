@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    
-   
+
+
     axios.get('http://localhost:8080/api/getProductCoffee') // Thay URL bằng API endpoint thực tế của bạn
         .then(response => {
             const allProducts = response.data;
             renderProducts(allProducts);
         })
         .catch(error => console.error('Error fetching products:', error));
-        
+
 });
 
 function renderProducts(products) {
@@ -36,6 +36,6 @@ function renderProducts(products) {
 
 
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }
 

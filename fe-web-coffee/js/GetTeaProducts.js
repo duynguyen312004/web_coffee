@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-   
+
     axios.get('http://localhost:8080/api/getProductTea') // Thay URL bằng API endpoint thực tế của bạn
         .then(response => {
             const teaProducts = response.data;
             renderProducts(teaProducts);
         })
         .catch(error => console.error('Error fetching products:', error));
-  
+
 });
 
 function renderProducts(products) {
     const container = document.querySelector('.tea__container .row');
-     if (container) {
+    if (container) {
         container.innerHTML = ''; // Xóa nội dung hiện có
 
         products.forEach(product => {
@@ -36,7 +36,6 @@ function renderProducts(products) {
 
 
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }
-
 

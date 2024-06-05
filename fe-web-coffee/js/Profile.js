@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('full-name').addEventListener('input', updateCustomer);
     document.getElementById('address').addEventListener('input', updateCustomer);
     document.getElementById('save-infor-btn').addEventListener('click', saveCustomer);
-    document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
 });
 
 function loadCustomerData() {
@@ -63,13 +62,13 @@ async function saveCustomer() {
 }
 
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }
 
 function updateWallet() {
     const customerData = JSON.parse(sessionStorage.getItem('customer'));
     if (customerData && customerData.wallet) {
-        document.getElementById('Wallet').textContent = "Ví của tôi: " + customerData.wallet + ' Đ';
+        document.getElementById('Wallet').textContent = "Ví của tôi: " + formatPrice(customerData.wallet) + ' Đ';
     }
 }
 

@@ -225,7 +225,7 @@ const getCustomerById = async (customerId) => {
 
 const createOrderService = async (customerId, items, receiverPhone, receiverAddress, receiverName) => {
     const client = await pool.connect();
-    const shippingFee = 15; // phí ship 15000đ
+    const shippingFee = 15000; // phí ship 15000đ
     try {
         await client.query('BEGIN');
         const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee;
@@ -259,6 +259,122 @@ const createOrderService = async (customerId, items, receiverPhone, receiverAddr
     }
 }
 
+const getProductCoffeeInforSorted = async (sortType) => {
+    let sortQuery;
+    switch (sortType) {
+        case 'name':
+            sortQuery = 'ORDER BY name';
+            break;
+        case 'price_asc':
+            sortQuery = 'ORDER BY price ASC';
+            break;
+        case 'price_desc':
+            sortQuery = 'ORDER BY price DESC';
+            break;
+        default:
+            sortQuery = 'ORDER BY name';
+    }
+
+    try {
+        const result = await pool.query(`SELECT * FROM product WHERE category ILIKE '%Cà Phê%' ${sortQuery}`);
+        return result.rows;
+    } catch (error) {
+        console.error('Error fetching sorted coffee products:', error);
+        throw error;
+    }
+};
+
+const searchProductsByNameFromDB = async (name) => {
+    try {
+        const result = await pool.query(`SELECT * FROM product WHERE name ILIKE $1`, [`%${name}%`]);
+        return result.rows;
+    } catch (error) {
+        console.error('Error searching products by name:', error);
+        throw error;
+    }
+};
+
+const getProductTeaInforSorted = async (sortType) => {
+    let sortQuery;
+    switch (sortType) {
+        case 'name':
+            sortQuery = 'ORDER BY name';
+            break;
+        case 'price_asc':
+            sortQuery = 'ORDER BY price ASC';
+            break;
+        case 'price_desc':
+            sortQuery = 'ORDER BY price DESC';
+            break;
+        default:
+            sortQuery = 'ORDER BY name';
+    }
+
+    try {
+        const result = await pool.query(`SELECT * FROM product WHERE category ILIKE '%Trà%' ${sortQuery}`);
+        return result.rows;
+    } catch (error) {
+        console.error('Error fetching sorted coffee products:', error);
+        throw error;
+    }
+};
+
+const getProductOtherInforSorted = async (sortType) => {
+    let sortQuery;
+    switch (sortType) {
+        case 'name':
+            sortQuery = 'ORDER BY name';
+            break;
+        case 'price_asc':
+            sortQuery = 'ORDER BY price ASC';
+            break;
+        case 'price_desc':
+            sortQuery = 'ORDER BY price DESC';
+            break;
+        default:
+            sortQuery = 'ORDER BY name';
+    }
+
+    try {
+        const result = await pool.query(`SELECT * FROM product WHERE category NOT ILIKE '%Trà%' AND category NOT ILIKE '%Cà Phê%' ${sortQuery}`);
+        return result.rows;
+    } catch (error) {
+        console.error('Error fetching sorted coffee products:', error);
+        throw error;
+    }
+};
+
+const updateProduct = async (productId, updatedData) => {
+    try {
+        await pool.query(
+            "UPDATE product SET name = $1, price = $2, inventory = $3, category = $4, description = $5 WHERE id = $6",
+            [updatedData.name, updatedData.price, updatedData.inventory, updatedData.category, updatedData.description, productId]
+        );
+        return {
+            errCode: 0,
+            message: "Updated successfully"
+        };
+    } catch (e) {
+        console.log('Error updating: ', e);
+        return {
+            errCode: 1,
+            message: "Error Updating"
+        }
+    }
+}
+
+const addProduct = async ({ name, price, inventory, category, description, imgBase64 }) => {
+    try {
+        const result = await pool.query(
+            "INSERT INTO product (name, price, inventory, category, description, img_path) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            [name, price, inventory, category, description, imgBase64]
+        );
+        return result.rows[0];
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
@@ -273,5 +389,11 @@ module.exports = {
     deleteProduct,
     deleteImageFile,
     createOrderService,
-    getCustomerById
+    getCustomerById,
+    getProductCoffeeInforSorted,
+    searchProductsByNameFromDB,
+    getProductTeaInforSorted,
+    getProductOtherInforSorted,
+    updateProduct,
+    addProduct
 }
