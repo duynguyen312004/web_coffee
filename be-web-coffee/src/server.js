@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+
 const { loadImagesToDatabase } = require('./controllers/homeControllers');
 
 require('dotenv').config();
@@ -11,9 +12,9 @@ app.use(cors({ credentials: true, origin: true }));
 
 const port = process.env.PORT || 8080;
 const hostname = process.env.HOST_NAME || 'localhost';
-
-app.use(express.json({ limit: '10mb' })); // Used to parse JSON bodies
-app.use(express.urlencoded({ extended: true, limit: '10mb' })); // Parse URL-encoded bodies
+app.use('/images', express.static(path.join(__dirname, 'img_name-database')));
+app.use(express.json({ limit: '25mb' })); // Used to parse JSON bodies
+app.use(express.urlencoded({ extended: true, limit: '25mb' })); // Parse URL-encoded bodies
 
 app.use('/', webRoutes);
 

@@ -35,41 +35,31 @@
 
     <!-- Main -->
     <div class="container menu">
-         <!-- Order -->
-         <div class="row order">
+        <section class="home__banner">
+            <div class="slideshow">
+                <div class="slideshow__inner">
+                    <a href="#!" class="slideshow__item">
+                        <img src="../assets/img/banner_menu.jpg" alt="" class="slideshow__img" />
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Order -->
+        <div class="row order">
             <p class="order__title">Sắp xếp theo</p>
             <div class="order-options">
-                <div class="btn">
+                <div class="btn" data-sort="name">
                     <p class="order__text">Tên</p>
                 </div>
-                <div class="btn">
+                <div class="btn" data-sort="price_asc">
                     <p class="order__text">Giá tăng dần</p>
                 </div>
-                <div class="btn">
+                <div class="btn" data-sort="price_desc">
                     <p class="order__text">Giá giảm dần</p>
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const buttons = document.querySelectorAll(
-                    ".order-options .btn"
-                );
-
-                buttons.forEach((button) => {
-                    button.addEventListener("click", function () {
-                        // Remove 'active' class from all buttons
-                        buttons.forEach((btn) =>
-                            btn.classList.remove("active")
-                        );
-
-                        // Add 'active' class to the clicked button
-                        this.classList.add("active");
-                    });
-                });
-            });
-        </script>
-        <section class="menu__container">
+        <section class="home__container">
             <div class="row row-cols-4 row-cols-md-1">
                 <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
             </div>

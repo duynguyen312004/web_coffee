@@ -26,17 +26,22 @@ async function handleLogIn(event) {
             password: state.password
         });
         let data = response.data;
+        console.log('Login response data:', data); // Thêm dòng này để kiểm tra dữ liệu trả về
         if (data && data.errCode !== 0) {
             state.errMessage = data.message;
             document.getElementById('loginResult').textContent = state.errMessage;
         }
         if (data && data.errCode === 0) {
             document.getElementById('loginResult').textContent = 'Login successful!';
-            sessionStorage.setItem('customer', JSON.stringify(data.customer));
-            if (data.customer.role === 'ADMIN') {
-                window.location.href = 'admin.html'
-            } else if (data.customer.role === 'Customer') {
+            sessionStorage.setItem('customer', JSON.stringify(data.data)); // Lưu thông tin người dùng vào sessionStorage
+            console.log('User role:', data.data.role); // Thêm dòng này để kiểm tra giá trị role
+            if (data.data && data.data.role === 'ADMIN') {
+                window.location.href = 'admin.html';
+            } else if (data.data && data.data.role === 'Customer') {
                 window.location.href = 'index-logined.html';
+            } else {
+                state.errMessage = 'Invalid user role';
+                document.getElementById('loginResult').textContent = state.errMessage;
             }
         }
     } catch (error) {
@@ -45,6 +50,8 @@ async function handleLogIn(event) {
             document.getElementById('loginResult').textContent = state.errMessage;
         } else {
             console.error('Error:', error);
+            state.errMessage = 'An unexpected error occurred';
+            document.getElementById('loginResult').textContent = state.errMessage;
         }
     }
 }

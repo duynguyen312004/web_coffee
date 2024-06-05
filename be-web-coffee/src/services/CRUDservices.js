@@ -375,6 +375,41 @@ const addProduct = async ({ name, price, inventory, category, description, imgBa
     }
 }
 
+const getOrdersByDateRange = async (start, end) => {
+    try {
+        const orders = await pool.query(
+            `SELECT id, date 
+             FROM "order" 
+             WHERE date BETWEEN $1 AND $2 
+             ORDER BY date`,
+            [start, end]
+        );
+
+        const orderDetailsPromises = orders.rows.map(async (order) => {
+            const details = await pool.query(
+                `SELECT product.name, product.img_name, order_detail.unit_price, order_detail.quantity 
+                 FROM order_detail 
+                 JOIN product ON order_detail.productid = product.id 
+                 WHERE order_detail.orderid = $1`,
+                [order.id]
+            );
+
+            return {
+                date: order.date,
+                details: details.rows.map(detail => ({
+                    ...detail,
+                    img_url: `http://localhost:8080/images/${detail.img_name}`
+                }))
+            };
+        });
+
+        const orderDetails = await Promise.all(orderDetailsPromises);
+
+        return orderDetails;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+};
 module.exports = {
     getAllProduct,
     handleCustomerLogin,
@@ -395,5 +430,6 @@ module.exports = {
     getProductTeaInforSorted,
     getProductOtherInforSorted,
     updateProduct,
-    addProduct
+    addProduct,
+    getOrdersByDateRange
 }

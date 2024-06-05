@@ -3,7 +3,7 @@ const { getHomePage, handleLogin, handleRegister, handleUpdate,
     getProductOther, handleDeleteProduct, createOrder,
     getProductCoffeeSorted, searchProductsByName,
     getProductTeaSorted, getProductOtherSorted,
-    handleUpdateProduct, handleAddProduct } = require('../controllers/homeControllers');
+    handleUpdateProduct, handleAddProduct, getOrder } = require('../controllers/homeControllers');
 
 const multerConfig = require('../config/multer');
 const express = require('express');
@@ -25,4 +25,5 @@ router.delete('/api/deleteProduct/:id', handleDeleteProduct);
 router.post('/api/createOrder', createOrder);
 router.put('/api/updateProduct/:id', handleUpdateProduct)
 router.post('/api/addProduct', multerConfig.single('image'), handleAddProduct)
+router.get('/api/orders', getOrder)
 module.exports = router;    

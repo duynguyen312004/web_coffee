@@ -10,14 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function renderProducts(products) {
-    const containers = document.querySelectorAll('.row.row-cols-4.row-cols-md-1');
-    containers.forEach(container => {
-        container.innerHTML = ''; // Clear existing content
-    });
+    const mainContainer = document.querySelector('.home__container');
+    mainContainer.innerHTML = ''; // Clear existing content
+
+    let rowContainer = createNewRowContainer();
 
     products.forEach((product, index) => {
-        const containerIndex = index % containers.length;
-        const container = containers[containerIndex];
+        if (index % 4 === 0 && index !== 0) {
+            mainContainer.appendChild(rowContainer);
+            rowContainer = createNewRowContainer();
+        }
 
         const productElement = `
             <div class="col">
@@ -31,8 +33,17 @@ function renderProducts(products) {
             </div>
         `;
 
-        container.innerHTML += productElement;
+        rowContainer.innerHTML += productElement;
     });
+
+    // Append the last row container
+    mainContainer.appendChild(rowContainer);
+}
+
+function createNewRowContainer() {
+    const rowContainer = document.createElement('div');
+    rowContainer.className = 'row row-cols-4 row-cols-md-1';
+    return rowContainer;
 }
 
 function formatPrice(price) {

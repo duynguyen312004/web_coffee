@@ -9,7 +9,7 @@ const { getAllProduct, handleCustomerLogin,
     searchProductsByNameFromDB,
     getProductTeaInforSorted,
     getProductOtherInforSorted,
-    updateProduct, addProduct } = require('../services/CRUDservices');
+    updateProduct, addProduct, getOrdersByDateRange } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -121,23 +121,23 @@ const handleLogin = async (req, res) => {
         return res.status(400).json({
             errCode: 1,
             message: "Missing input parameters",
-        })
+        });
     }
     try {
         let account = await handleAdminLogin(sdt, password);
-        if (!account || account.errCode !== 0) {
+        if (account.errCode === 2) {
             account = await handleCustomerLogin(sdt, password);
         }
         return res.status(200).json({
             errCode: account.errCode,
             message: account.errMessage,
-            customer: account.data ? account.data : {}
+            data: account.data ? account.data : {}
         });
-
     } catch (e) {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+
 
 const handleRegister = async (req, res) => {
     let sdt = req.body.sdt;
@@ -374,6 +374,19 @@ const handleAddProduct = async (req, res) => {
         res.status(500).json({ message: "Internal server error", error: error.message });
     }
 };
+
+const getOrder = async (req, res) => {
+    const { start, end } = req.query;
+
+    try {
+        const orders = await getOrdersByDateRange(start, end);
+        res.json(orders);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+}
+
 module.exports = {
     getHomePage,
     handleLogin,
@@ -391,5 +404,6 @@ module.exports = {
     getProductTeaSorted,
     getProductOtherSorted,
     handleUpdateProduct,
-    handleAddProduct
+    handleAddProduct,
+    getOrder
 }
