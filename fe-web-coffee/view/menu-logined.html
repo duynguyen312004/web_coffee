@@ -35,6 +35,40 @@
 
     <!-- Main -->
     <div class="container menu">
+         <!-- Order -->
+         <div class="row order">
+            <p class="order__title">Sắp xếp theo</p>
+            <div class="order-options">
+                <div class="btn">
+                    <p class="order__text">Tên</p>
+                </div>
+                <div class="btn">
+                    <p class="order__text">Giá tăng dần</p>
+                </div>
+                <div class="btn">
+                    <p class="order__text">Giá giảm dần</p>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const buttons = document.querySelectorAll(
+                    ".order-options .btn"
+                );
+
+                buttons.forEach((button) => {
+                    button.addEventListener("click", function () {
+                        // Remove 'active' class from all buttons
+                        buttons.forEach((btn) =>
+                            btn.classList.remove("active")
+                        );
+
+                        // Add 'active' class to the clicked button
+                        this.classList.add("active");
+                    });
+                });
+            });
+        </script>
         <section class="menu__container">
             <div class="row row-cols-4 row-cols-md-1">
                 <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->

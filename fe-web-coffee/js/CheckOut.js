@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     loadCartDropdown();
     updateWallet();
     document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
+    const customerData = JSON.parse(sessionStorage.getItem('customer'));
+    if (customerData) {
+        document.getElementById('full-name').value = customerData.name;
+        document.getElementById('phone').value = customerData.phone;
+        document.getElementById('address').value = customerData.address;
+    }
 });
 
 function updateCartDisplay() {
@@ -11,7 +17,8 @@ function updateCartDisplay() {
     const cartList = document.querySelector('.cart-info__list');
     cartList.innerHTML = ''; // Đảm bảo làm sạch nội dung cũ
 
-    cart.forEach(item => {
+    cart.forEach(async (item) => {
+        const productDetails = await getProductDetails(item.id);
         const cartItem = document.createElement('article');
         cartItem.classList.add('cart-item');
         cartItem.innerHTML = `
@@ -27,7 +34,7 @@ function updateCartDisplay() {
                     </h3>
                     <p class="cart-item__price-wrap">
                         ${formatPrice(item.price)} đ |
-                        <span class="cart-item__status">Còn hàng</span>
+                        <span class="cart-item__status">Còn lại: ${productDetails.inventory}</span>
                     </p>
                     <div class="cart-item__ctrl cart-item__ctrl--md-block">
                         <div class="cart-item__input">
@@ -56,6 +63,16 @@ function updateCartDisplay() {
     });
 
     updateTotalPrice();
+}
+
+async function getProductDetails(productId) {
+    try {
+        const response = await axios.get(`http://localhost:8080/api/products/${productId}`);
+        return response.data;
+    } catch (error) {
+        console.log('Failed to get product details for: ${productId}: ', error);
+        return { inventory: 'N/A' }
+    }
 }
 
 function updateQuantity(productId, change) {
@@ -140,4 +157,52 @@ function logout() {
     sessionStorage.clear();
     alert("Bạn đã đăng xuất thành công!");
     window.location.href = '../index.html'; // Redirect to home page after logout
+}
+
+function placeOrder() {
+    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    const customerData = JSON.parse(sessionStorage.getItem('customer'));
+    if (!cart.length) {
+        alert("Giỏ hàng của bạn đang trống!");
+        return;
+    }
+    if (!customerData) {
+        alert("Vui lòng nhập thông tin nhận hàng");
+        return;
+    }
+    const receiverPhone = document.getElementById('phone').value;
+    const receiverAddress = document.getElementById('address').value;
+    const receiverName = document.getElementById('full-name').value;
+    const order = {
+        customerId: customerData.id,
+        items: cart,
+        receiverPhone,
+        receiverAddress,
+        receiverName
+    };
+    sendOrder(order);
+}
+
+function sendOrder(order) {
+    axios.post('http://localhost:8080/api/createOrder', order)
+        .then(response => {
+            if (response.data.message === 'Đặt hàng thành công!') {
+                alert("Đơn hàng của bạn đã được đặt thành công!");
+                sessionStorage.removeItem('cart');
+                const customerData = response.data.customer;
+                sessionStorage.setItem('customer', JSON.stringify(customerData));
+                updateWallet();
+                window.location.href = 'index-logined.html';
+            } else {
+                alert(`Có lỗi xảy ra: ${response.data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('Đặt hàng thất bại: ', error);
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(`${error.response.data.message}`);
+            } else {
+                alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại');
+            }
+        });
 }

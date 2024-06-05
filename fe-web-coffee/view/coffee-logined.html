@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coffee</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Coffee</title>
 
         <!-- Favicon -->
         <link
@@ -33,13 +32,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="../assets/css/main.css" />
-
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/GetCoffeeProducts-logined.js" defer></script>
-        <script src="../assets/js/scripts.js"></script>
     </head>
-
     <body>
         <!-- Header -->
         <header id="header" class="header"></header>
@@ -49,18 +42,68 @@
 
         <!-- Main -->
         <div class="container coffee">
-            <section class="coffee__container">
+            <!-- Order -->
+            <div class="row order">
+                <p class="order__title">Sắp xếp theo</p>
+                <div class="order-options">
+                    <div class="btn">
+                        <p class="order__text">Tên</p>
+                    </div>
+                    <div class="btn">
+                        <p class="order__text">Giá tăng dần</p>
+                    </div>
+                    <div class="btn">
+                        <p class="order__text">Giá giảm dần</p>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const buttons = document.querySelectorAll(
+                        ".order-options .btn"
+                    );
+
+                    buttons.forEach((button) => {
+                        button.addEventListener("click", function () {
+                            // Remove 'active' class from all buttons
+                            buttons.forEach((btn) =>
+                                btn.classList.remove("active")
+                            );
+
+                            // Add 'active' class to the clicked button
+                            this.classList.add("active");
+                        });
+                    });
+                });
+            </script>
+            <section class="home__container">
+                <div class="row row-cols-4 row-cols-md-1">
+                    <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+                </div>
+                <div class="row row-cols-4 row-cols-md-1">
+                    <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+                </div>
+                <div class="row row-cols-4 row-cols-md-1">
+                    <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+                </div>
+                <div class="row row-cols-4 row-cols-md-1">
+                    <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+                </div>
                 <div class="row row-cols-4 row-cols-md-1">
                     <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
                 </div>
             </section>
         </div>
 
-    <!-- Footer -->
-    <footer id="footer"></footer>
-    <script>
-        load("#footer", "../templates/footer.html");
-    </script>
-</body>
+        <!-- Footer -->
+        <footer id="footer"></footer>
+        <script>
+            load("#footer", "../templates/footer.html");
+        </script>
 
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../js/GetCoffeeProducts-logined.js" defer></script>
+        <script src="../assets/js/scripts.js"></script>
+    </body>
 </html>

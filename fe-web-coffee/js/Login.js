@@ -31,11 +31,10 @@ async function handleLogIn(event) {
             document.getElementById('loginResult').textContent = state.errMessage;
         }
         if (data && data.errCode === 0) {
-            // Xử lý đăng nhập thành công (ví dụ: chuyển hướng đến trang khác)
             document.getElementById('loginResult').textContent = 'Login successful!';
-            sessionStorage.setItem('customer', JSON.stringify(data.customer)); // Sửa lại phần này
+            sessionStorage.setItem('customer', JSON.stringify(data.customer));
             if (data.customer.role === 'ADMIN') {
-                window.location.href = 'profile.html'
+                window.location.href = 'admin.html'
             } else if (data.customer.role === 'Customer') {
                 window.location.href = 'index-logined.html';
             }

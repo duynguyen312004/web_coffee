@@ -1,4 +1,6 @@
-const { getHomePage, handleLogin, handleRegister, handleUpdate, getProduct, getProductCoffee, getProductTea, getProductOther } = require('../controllers/homeControllers');
+const { getHomePage, handleLogin, handleRegister, handleUpdate,
+    getProduct, getProductCoffee, getProductTea,
+    getProductOther, handleDeleteProduct, createOrder } = require('../controllers/homeControllers');
 
 
 const express = require('express');
@@ -12,4 +14,6 @@ router.get('/api/products/:id', getProduct);
 router.get('/api/getProductCoffee', getProductCoffee);
 router.get('/api/getProductTea', getProductTea);
 router.get('/api/getProductOther', getProductOther);
+router.delete('/api/deleteProduct/:id', handleDeleteProduct);
+router.post('/api/createOrder', createOrder);
 module.exports = router;    

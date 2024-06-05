@@ -56,7 +56,6 @@ function addToCart(productId) {
             });
         }
         sessionStorage.setItem('cart', JSON.stringify(cart));
-        alert("Thêm sản phẩm vào giỏ hàng thành công!");
     }).catch((error) => console.log("Error fetching product: ", error));
 }
 

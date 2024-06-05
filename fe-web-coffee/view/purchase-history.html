@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>The Coffee House</title>
+
+        <!-- Favicon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../assets/favicon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../assets/favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="../assets/favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <!-- Font -->
+        <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../assets/css/main.css" />
+
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../js/Profile.js" defer></script>
+        <script src="../assets/js/scripts.js"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "../templates/header-logined.html");
+        </script>
+
+        <!-- Profile content -->
+        <div class="profile">
+            <div class="container">
+                <div class="profile-container">
+                    <div class="row">
+                        <div class="col-3">
+                            <aside class="profile__sidebar">
+                                <div class="profile-user">
+                                    <img
+                                        src="../assets/img/avatar.jpg"
+                                        alt=""
+                                        class="profile-user__avatar"
+                                    />
+                                    <h1
+                                        id="profile-name"
+                                        class="profile-user__name"
+                                    >
+                                        <!-- The name will be populated here -->
+                                    </h1>
+                                    <p class="profile-user__desc">Khách hàng</p>
+                                </div>
+                                <!-- Menu 1 -->
+                                <div class="profile-menu history-sidebar">
+                                    <h3 class="profile-menu__title"></h3>
+                                    <ul class="profile-menu__list">
+                                        <li>
+                                            <a
+                                                href="./profile.html"
+                                                class="profile-menu__link"
+                                            >
+                                                <span
+                                                    class="profile-menu__icon"
+                                                >
+                                                    <img
+                                                        src="../assets/icons/profile.svg"
+                                                        alt=""
+                                                        class="icon"
+                                                    />
+                                                </span>
+                                                Thông tin tài khoản
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#!"
+                                                class="profile-menu__link"
+                                            >
+                                                <span
+                                                    class="profile-menu__icon"
+                                                >
+                                                    <img
+                                                        src="../assets/icons/location.svg"
+                                                        alt=""
+                                                        class="icon"
+                                                    />
+                                                </span>
+                                                Địa chỉ
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#!"
+                                                class="profile-menu__link"
+                                            >
+                                                <span
+                                                    class="profile-menu__icon"
+                                                >
+                                                    <img
+                                                        src="../assets/icons/buy-history.svg"
+                                                        alt=""
+                                                        class="icon"
+                                                    />
+                                                </span>
+                                                Lịch sử mua hàng
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#!"
+                                                class="profile-menu__link"
+                                            >
+                                                <span
+                                                    class="profile-menu__icon"
+                                                >
+                                                    <img
+                                                        src="../assets/icons/your-favorite.svg"
+                                                        alt=""
+                                                        class="icon"
+                                                    />
+                                                </span>
+                                                Sản phẩm yêu thích
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <div class="col-9">
+                            <div class="user-info">
+                                <h2 class="user-info__title">
+                                    Lịch sử mua hàng
+                                </h2>
+                                <!-- Wallet -->
+                                <h3 class="user-info__heading">
+                                    Chọn thời gian mua hàng
+                                </h3>
+                                <ul class="purchase-history">
+                                    <li class="purchase-date" data-id="order-1">
+                                        01/01/2024
+                                    </li>
+                                    <li class="purchase-date" data-id="order-2">
+                                        15/02/2024
+                                    </li>
+                                    <li class="purchase-date" data-id="order-3">
+                                        30/03/2024
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden product data -->
+        <div id="product-data" style="display: none">
+            <div data-id="order-1">
+                <div class="row row-cols-1 row-cols-md-1">
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-id="order-2">
+                <div class="row row-cols-1 row-cols-md-1">
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-id="order-3">
+                <div class="row row-cols-1 row-cols-md-1">
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="purchased-item">
+                            <img
+                                src="../assets/img/category-item-1.webp"
+                                alt=""
+                                class="purchased-item__thumb"
+                            />
+                            <div class="purchased-item__content">
+                                <a href="" class="purchased-item__title"
+                                    >Hi-Tea Yuzu Kombucha</a
+                                >
+                                <div class="purchased-item__desc">
+                                    <p class="purchased-item__price-wrap">
+                                        45.000 đ |
+                                        <span class="purchased-item__status"
+                                            >Số lượng:
+                                            <p class="purchased-item__number">
+                                                1
+                                            </p></span
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const dates = document.querySelectorAll(".purchase-date");
+
+                dates.forEach((date) => {
+                    date.addEventListener("click", function () {
+                        const targetId = this.getAttribute("data-id");
+                        let targetDetail = document.querySelector(
+                            `.purchase-details[data-id="${targetId}"]`
+                        );
+
+                        if (!targetDetail) {
+                            targetDetail = document.createElement("div");
+                            targetDetail.classList.add("purchase-details");
+                            targetDetail.setAttribute("data-id", targetId);
+
+                            const productData = document.querySelector(
+                                `#product-data [data-id="${targetId}"]`
+                            ).innerHTML;
+
+                            targetDetail.innerHTML = `
+                            <h4>Đơn hàng ngày ${this.textContent}</h4>
+                            ${productData}
+                        `;
+
+                            this.parentNode.insertBefore(
+                                targetDetail,
+                                this.nextSibling
+                            );
+
+                            targetDetail.offsetHeight; // Trigger reflow
+
+                            setTimeout(() => {
+                                targetDetail.classList.add("active");
+                            }, 10);
+                        } else {
+                            if (targetDetail.classList.contains("active")) {
+                                targetDetail.classList.remove("active");
+                            } else {
+                                const otherDetails =
+                                    document.querySelectorAll(
+                                        ".purchase-details"
+                                    );
+                                otherDetails.forEach((detail) => {
+                                    detail.classList.remove("active");
+                                });
+                                setTimeout(() => {
+                                    targetDetail.classList.add("active");
+                                }, 10);
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <!-- Footer -->
+        <footer id="footer"></footer>
+        <script>
+            load("#footer", "../templates/footer.html");
+        </script>
+    </body>
+</html>

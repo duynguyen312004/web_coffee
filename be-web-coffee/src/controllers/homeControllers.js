@@ -1,7 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 const pool = require('../config/database');
-const { getAllProduct, handleCustomerLogin, handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor, getProductCoffeeInfor, getProductTeaInfor, getProductOtherInfor, handleAdminLogin } = require('../services/CRUDservices');
+const { getAllProduct, handleCustomerLogin,
+    handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor,
+    getProductCoffeeInfor, getProductTeaInfor,
+    getProductOtherInfor, handleAdminLogin, deleteProduct, deleteImageFile,
+    createOrderService, getCustomerById } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -236,6 +240,43 @@ const getProductOther = async (req, res) => {
     }
 }
 
+const handleDeleteProduct = async (req, res) => {
+    try {
+        let productId = req.params.id;
+        const product = await getProductInfor(productId);
+        if (product.length > 0) {
+            const imgFileName = imageFileMapping[productId];
+            const imgFilePath = path.join(__dirname, '..', 'img-database', imgFileName);
+
+            await deleteProduct(productId);
+            await deleteImageFile(imgFilePath);
+            return res.status(200).json({ message: "Product deleted successfully" });
+        } else {
+            return res.status(404).json({ message: "Cannot find product" });
+        }
+    } catch (e) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const createOrder = async (req, res) => {
+    const { customerId, items, receiverPhone, receiverAddress, receiverName } = req.body;
+    try {
+        await createOrderService(customerId, items, receiverPhone, receiverAddress, receiverName);
+        const customer = await getCustomerById(customerId);
+        return res.status(200).json({ message: "Đặt hàng thành công!", customer });
+    } catch (error) {
+        console.log("Đặt hàng thất bại: ", error);
+        if (error.message.includes('Số dư ví không đủ') || error.message.includes('Không đủ tồn kho cho sản phẩm')) {
+            return res.status(400).json({
+                message: error.message
+            })
+        } else {
+            return res.status(500).json({ message: "Đặt hàng thất bại" });
+        }
+    }
+}
+
 module.exports = {
     getHomePage,
     handleLogin,
@@ -246,4 +287,6 @@ module.exports = {
     getProductCoffee,
     getProductTea,
     getProductOther,
+    handleDeleteProduct,
+    createOrder
 }

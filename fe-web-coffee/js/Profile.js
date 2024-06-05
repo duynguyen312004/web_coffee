@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('full-name').addEventListener('input', updateCustomer);
     document.getElementById('address').addEventListener('input', updateCustomer);
     document.getElementById('save-infor-btn').addEventListener('click', saveCustomer);
+    document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
 });
 
 function loadCustomerData() {
@@ -97,4 +98,9 @@ function loadCartDropdown() {
         `;
         cartDropdown.appendChild(cartItem);
     });
+}
+function logout() {
+    sessionStorage.clear();
+    alert("Bạn đã đăng xuất thành công!");
+    window.location.href = '../index.html'; // Redirect to home page after logout
 }
