@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateCartDisplay();
     loadCartDropdown();
     updateWallet();
-    document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
     const customerData = JSON.parse(sessionStorage.getItem('customer'));
     if (customerData) {
         document.getElementById('full-name').value = customerData.name;
@@ -114,12 +113,12 @@ function updateTotalPrice() {
         totalPrice += item.price * item.quantity;
     });
     document.getElementById('total-price').textContent = `${formatPrice(totalPrice)} đ`;
-    document.getElementById('final-price').textContent = `${formatPrice(totalPrice + 15)} đ`; // Thêm phí vận chuyển
+    document.getElementById('final-price').textContent = `${formatPrice(totalPrice + 15000)} đ`; // Thêm phí vận chuyển
 }
 
 // Định dạng giá tiền
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }
 
 function loadCartDropdown() {
@@ -150,7 +149,7 @@ function loadCartDropdown() {
 function updateWallet() {
     const customerData = JSON.parse(sessionStorage.getItem('customer'));
     if (customerData && customerData.wallet) {
-        document.getElementById('Wallet').textContent = "Ví của tôi: " + (customerData.wallet) + ' đ';
+        document.getElementById('Wallet').textContent = "Ví của tôi: " + formatPrice(customerData.wallet) + ' đ';
     }
 }
 function logout() {

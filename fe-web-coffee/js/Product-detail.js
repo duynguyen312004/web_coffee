@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadCartDropdown();
-    updateWallet();
-    document.querySelector('.dropdown-action[onclick = "logout()"]').addEventListener('click', logout);
-    // Lấy ID sản phẩm từ URL
+    updateWallet();    // Lấy ID sản phẩm từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
@@ -61,7 +59,7 @@ function addToCart(productId) {
 
 // Định dạng giá tiền
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }
 
 function loadCartDropdown() {
@@ -93,7 +91,7 @@ function loadCartDropdown() {
 function updateWallet() {
     const customerData = JSON.parse(sessionStorage.getItem('customer'));
     if (customerData && customerData.wallet) {
-        document.getElementById('Wallet').textContent = "Ví của tôi: " + customerData.wallet + ' Đ';
+        document.getElementById('Wallet').textContent = "Ví của tôi: " + formatPrice(customerData.wallet) + ' Đ';
     }
 }
 function logout() {

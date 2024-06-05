@@ -1,410 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The Coffee House</title>
 
-        <!-- Favicon -->
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="../assets/favicon/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="../assets/favicon/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="../assets/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="../assets/favicon/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Coffee House</title>
 
-        <!-- Font -->
-        <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="../assets/css/main.css" />
+    <!-- Font -->
+    <link rel="stylesheet" href="../assets/fonts/stylesheet.css" />
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="../js/getAdminCoffee.js" defer></script>
-        <script src="../assets/js/scripts.js"></script>
-    </head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-    <body>
-        <!-- Header -->
-         <!--<header id="header" class="header"></header>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/getAdminCoffee.js" defer></script>
+    <script src="../assets/js/scripts.js"></script>
+
+    <style>
+        #editProductModal,
+        #addProductModal {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            border-radius: 8px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        #editProductModal label,
+        #editProductModal .price-input-container,
+        #editProductModal input,
+        #editProductModal button,
+        #addProductModal label,
+        #addProductModal .price-input-container,
+        #addProductModal input,
+        #addProductModal button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #editProductModal input,
+        #addProductModal input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #editProductModal button,
+        #addProductModal button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ff6600;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #editProductModal button[type="button"],
+        #addProductModal button[type="button"] {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .price-input-container {
+            position: relative;
+        }
+
+        .price-input-container input {
+            padding-right: 40px;
+        }
+
+        .price-input-container span {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body data-page="coffee">
+    <!-- Header -->
+    <!--<header id="header" class="header"></header>
         <script>
             load("#header", "../templates/header-logined.html");
         </script> -->
 
-        <div class="row row__admin">
-            <!-- Sidebar -->
-            <div class="col-2">
-                <div class="sidebar">
-                    <img
-                        src="../assets/img/tch-logo.png"
-                        alt=""
-                        class="logo__img"
-                        style="width: 200px"
-                    />
-                    <h1 class="sidebar__title">Danh mục</h1>
-                    <ul class="sidebar__content">
-                        <li>
-                            <a
-                                href="./admin-coffee.html"
-                                class="sidebar__content--list"
-                                ><p class="choose-coffee">Cà phê</p></a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="./admin-tea.html"
-                                class="sidebar__content--list"
-                                >Trà</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="./admin-others.html"
-                                class="sidebar__content--list"
-                                >Sản phẩm khác</a
-                            >
-                        </li>
-                    </ul>
+    <div class="row row__admin">
+        <!-- Sidebar -->
+        <div class="col-2">
+            <div class="sidebar">
+                <img src="../assets/img/tch-logo.png" alt="" class="logo__img" style="width: 200px" />
+                <h1 class="sidebar__title">Danh mục</h1>
+                <ul class="sidebar__content">
+                    <li>
+                        <a href="./admin-coffee.html" class="sidebar__content--list">
+                            <p class="choose-coffee">Cà phê</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./admin-tea.html" class="sidebar__content--list">Trà</a>
+                    </li>
+                    <li>
+                        <a href="./admin-others.html" class="sidebar__content--list">Sản phẩm khác</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div class="col-10 main">
+            <!-- Navbar -->
+            <div class="main__navbar">
+                <div class="main__search">
+                    <img src="../assets/icons/search.svg" alt="" class="main__search--icon" />
+                    <form action="" class="search">
+                        <input type="text" name="" id="search-input" placeholder="Tìm kiếm tên sản phẩm"
+                            class="form__input" required="" />
+                    </form>
+                </div>
+                <div class="top-act__user">
+                    <img src="../assets/img/avatar.jpg" alt="" class="top-act__avatar" />
+
+                    <!-- Dropdown -->
+                    <div class="dropdown dropdown__admin">
+                        <div class="dropdown__inner">
+                            <a class="dropdown-action" onclick="logout()">Đăng xuất</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Main -->
-            <div class="col-10 main">
-                <!-- Navbar -->
-                <div class="main__navbar">
-                    <div class="main__search">
-                        <img
-                            src="../assets/icons/search.svg"
-                            alt=""
-                            class="main__search--icon"
-                        />
-                        <form action="" class="search">
-                            <input
-                                type="text"
-                                name=""
-                                id="full-name"
-                                placeholder="Tìm kiếm tên sản phẩm"
-                                class="form__input"
-                                required=""
-                            />
-                        </form>
+            <!-- Order -->
+            <div class="row order">
+                <p class="order__title">Sắp xếp theo</p>
+                <div class="order-options">
+                    <div class="btn" data-sort="name">
+                        <p class="order__text">Tên</p>
                     </div>
-                    <div class="top-act__user">
-                        <img
-                            src="../assets/img/avatar.jpg"
-                            alt=""
-                            class="top-act__avatar"
-                        />
-
-                        <!-- Dropdown -->
-                        <div class="dropdown dropdown__admin">
-                            <div class="dropdown__inner">
-                                <a class="dropdown-action" onclick="logout()"
-                                    >Đăng xuất</a
-                                >
-                            </div>
-                        </div>
+                    <div class="btn" data-sort="price_asc">
+                        <p class="order__text">Giá tăng dần</p>
+                    </div>
+                    <div class="btn" data-sort="price_desc">
+                        <p class="order__text">Giá giảm dần</p>
                     </div>
                 </div>
-
-                <!-- Order -->
-                <div class="row order">
-                    <p class="order__title">Sắp xếp theo</p>
-                    <div class="order-options">
-                        <div class="btn">
-                            <p class="order__text">Tên</p>
-                        </div>
-                        <div class="btn">
-                            <p class="order__text">Giá tăng dần</p>
-                        </div>
-                        <div class="btn">
-                            <p class="order__text">Giá giảm dần</p>
-                        </div>
-                    </div>
-                    <button class="add-new-products-btn">
-                        <p class="add__text">Thêm sản phẩm</p>
-                    </button>
-
-                </div>
-
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const buttons = document.querySelectorAll(
-                            ".order-options .btn"
-                        );
-
-                        buttons.forEach((button) => {
-                            button.addEventListener("click", function () {
-                                // Remove 'active' class from all buttons
-                                buttons.forEach((btn) =>
-                                    btn.classList.remove("active")
-                                );
-
-                                // Add 'active' class to the clicked button
-                                this.classList.add("active");
-                            });
-                        });
-                    });
-                </script>
-
-                
-
-                <!-- Add new products -->
-        
-
-                <div class="list"></div>
-                <!-- Products list -->
-                
-                    <div class="container coffee">
-                        <section class="coffee__container">
-                            <div class="row row-cols-1 row-cols-md-1">
-                                <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
-                            </div>
-                        </section>
-                    </div>
-                    <!-- Coffee -->
-                    <!-- <section class="list__coffee">
-                        <div
-                            class="row row__admin col-12 row-cols-12 row-cols-md-1"
-                        >
-                            <div class="col-12">
-                                <div class="coffee-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-1.webp"
-                                            alt=""
-                                            class="coffee-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    Americano Đá
-                                                </a>
-                                            </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
-                                                <span
-                                                    class="coffee-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="coffee-item__ctrl">
-                                                <button
-                                                    class="coffee-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
-                                                    />
-                                                </button>
-
-                                                <button
-                                                    class="coffee-item__edit-btn"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/edit.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="coffee-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-1.webp"
-                                            alt=""
-                                            class="coffee-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    Americano Đá
-                                                </a>
-                                            </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
-                                                <span
-                                                    class="coffee-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="coffee-item__ctrl">
-                                                <button
-                                                    class="coffee-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
-                                                    />
-                                                </button>
-
-                                                <button
-                                                    class="coffee-item__edit-btn"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/edit.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="coffee-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-1.webp"
-                                            alt=""
-                                            class="coffee-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    Americano Đá
-                                                </a>
-                                            </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
-                                                <span
-                                                    class="coffee-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="coffee-item__ctrl">
-                                                <button
-                                                    class="coffee-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
-                                                    />
-                                                </button>
-
-                                                <button
-                                                    class="coffee-item__edit-btn"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/edit.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="coffee-item">
-                                    <a href="./product-detail.html?id=17">
-                                        <img
-                                            src="../assets/img/category-item-1.webp"
-                                            alt=""
-                                            class="coffee-item__thumb"
-                                        />
-                                    </a>
-                                    <div class="coffee-item__content">
-                                        <div class="coffee-item__content-left">
-                                            <h3 class="coffee-item__title">
-                                                <a
-                                                    href="./product-detail.html?id=17"
-                                                >
-                                                    Americano Đá
-                                                </a>
-                                            </h3>
-                                            <p class="coffee-item__price-wrap">
-                                                45.000 đ |
-                                                <span
-                                                    class="coffee-item__status"
-                                                    >Còn hàng</span
-                                                >
-                                            </p>
-                                        </div>
-                                        <div class="coffee-item__content-right">
-                                            <p class="coffee-item__total-price">
-                                                45.000 đ
-                                            </p>
-                                            <div class="coffee-item__ctrl">
-                                                <button
-                                                    class="coffee-item__ctrl-btn"
-                                                    onclick="removeFromCoffee(17)"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/trash.svg"
-                                                        alt="Remove"
-                                                    />
-                                                </button>
-
-                                                <button
-                                                    class="coffee-item__edit-btn"
-                                                >
-                                                    <img
-                                                        src="../assets/icons/edit.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> 
-                
+                <button class="add-new-products-btn" onclick="showAddModal()">
+                    <p class="add__text">Thêm sản phẩm</p>
+                </button>
             </div>
-        </div> -->
+            <div class="container coffee">
+                <section class="coffee__container">
+                    <div class="row row-cols-1 row-cols-md-1">
+                        <!-- Các sản phẩm cà phê sẽ được hiển thị tại đây -->
+                    </div>
+                </section>
+            </div>
 
-        <!-- Footer -->
-        <footer id="footer"></footer>
-        <script>
-            load("#footer", "../templates/footer.html");
-        </script>
-    </body>
+            <div class="modal-overlay" id="modalOverlay"></div>
+
+            <div id="editProductModal">
+                <form id="editProductForm">
+                    <input type="hidden" id="editProductId">
+                    <label for="editProductName">Tên sản phẩm:</label>
+                    <input type="text" id="editProductName" required>
+                    <label for="editProductPrice">Giá:</label>
+                    <div class="price-input-container">
+                        <input type="number" id="editProductPrice" required>
+                        <span>VNĐ</span>
+                    </div>
+                    <label for="editProductInventory">Số lượng:</label>
+                    <input type="number" id="editProductInventory" required>
+                    <label for="editProductCategory">Danh mục:</label>
+                    <input type="text" id="editProductCategory" required>
+                    <label for="editProductDescription">Mô tả:</label>
+                    <textarea id="editProductDescription" required></textarea>
+                    <button type="submit">Lưu</button>
+                    <button type="button" onclick="hideEditModal()">Hủy</button>
+                </form>
+            </div>
+
+            <div id="addProductModal">
+                <form id="addProductForm">
+                    <label for="addProductName">Tên sản phẩm:</label>
+                    <input type="text" id="addProductName" required>
+                    <label for="addProductPrice">Giá:</label>
+                    <div class="price-input-container">
+                        <input type="number" id="addProductPrice" required>
+                        <span>VNĐ</span>
+                    </div>
+                    <label for="addProductInventory">Số lượng:</label>
+                    <input type="number" id="addProductInventory" required>
+                    <label for="addProductCategory">Danh mục:</label>
+                    <input type="text" id="addProductCategory" required>
+                    <label for="addProductDescription">Mô tả:</label>
+                    <textarea id="addProductDescription" required></textarea>
+                    <label for="addProductImage">Hình ảnh:</label>
+                    <input type="file" id="addProductImage" accept="image/*" required>
+                    <button type="submit">Thêm</button>
+                    <button type="button" onclick="hideAddModal()">Hủy</button>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <footer id="footer"></footer>
+            <script>
+                load("#footer", "../templates/footer.html");
+
+                function showEditModal(productId, name, price, inventory, category) {
+                    document.getElementById('editProductId').value = productId;
+                    document.getElementById('editProductName').value = name;
+                    document.getElementById('editProductPrice').value = price;
+                    document.getElementById('editProductInventory').value = inventory;
+                    document.getElementById('editProductCategory').value = category;
+                    document.getElementById('editProductModal').style.display = 'block';
+                    document.getElementById('modalOverlay').style.display = 'block'; // Hiển thị lớp phủ
+                }
+
+                function hideEditModal() {
+                    document.getElementById('editProductModal').style.display = 'none';
+                    document.getElementById('modalOverlay').style.display = 'none'; // Ẩn lớp phủ
+                }
+
+                function showAddModal() {
+                    document.getElementById('addProductModal').style.display = 'block';
+                    document.getElementById('modalOverlay').style.display = 'block'; // Hiển thị lớp phủ
+                }
+
+                function hideAddModal() {
+                    document.getElementById('addProductModal').style.display = 'none';
+                    document.getElementById('modalOverlay').style.display = 'none'; // Ẩn lớp phủ
+                }
+            </script>
+</body>
+
 </html>

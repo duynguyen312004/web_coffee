@@ -5,7 +5,11 @@ const { getAllProduct, handleCustomerLogin,
     handleCusRegister, handleUpdateCus, saveImageToDatabase, getProductInfor,
     getProductCoffeeInfor, getProductTeaInfor,
     getProductOtherInfor, handleAdminLogin, deleteProduct, deleteImageFile,
-    createOrderService, getCustomerById } = require('../services/CRUDservices');
+    createOrderService, getCustomerById, getProductCoffeeInforSorted,
+    searchProductsByNameFromDB,
+    getProductTeaInforSorted,
+    getProductOtherInforSorted,
+    updateProduct, addProduct } = require('../services/CRUDservices');
 const { error } = require('console');
 
 const imageFileMapping = {
@@ -277,6 +281,99 @@ const createOrder = async (req, res) => {
     }
 }
 
+const getProductCoffeeSorted = async (req, res) => {
+    try {
+        const sortType = req.query.sort || 'name';
+        const products = await getProductCoffeeInforSorted(sortType);
+        res.json(products);
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+const searchProductsByName = async (req, res) => {
+    try {
+        const name = req.query.name || '';
+        const products = await searchProductsByNameFromDB(name);
+        res.json(products);
+    } catch (error) {
+        console.error('Error searching products by name:', error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const getProductTeaSorted = async (req, res) => {
+    try {
+        const sortType = req.query.sort || 'name';
+        const products = await getProductTeaInforSorted(sortType);
+        res.json(products);
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+const getProductOtherSorted = async (req, res) => {
+    try {
+        const sortType = req.query.sort || 'name';
+        const products = await getProductOtherInforSorted(sortType);
+        res.json(products);
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
+const handleUpdateProduct = async (req, res) => {
+    try {
+        let productId = req.params.id;
+        let { name, price, inventory, category, description } = req.body;
+
+        await updateProduct(productId, { name, price, inventory, category, description });
+
+        return res.status(200).json({ message: "Product updated successfully" });
+    } catch (e) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const fileToBase64 = file => new Promise((resolve, reject) => {
+    fs.readFile(file, (err, data) => {
+        if (err) {
+            reject(err);
+        } else {
+            const base64Data = data.toString('base64');
+            resolve(base64Data);
+        }
+    });
+});
+
+const handleAddProduct = async (req, res) => {
+    try {
+        const { name, price, inventory, category, description } = req.body;
+        // Kiểm tra các trường bắt buộc
+        if (!name || !price || !inventory || !category || !description) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        // Kiểm tra xem req.file có tồn tại không
+        if (!req.file) {
+            return res.status(400).json({ message: "Image file is required" });
+        }
+        // Sử dụng đường dẫn của ảnh thay vì buffer
+        const imgPath = path.resolve(__dirname, '..', 'img-database', req.file.filename);
+        console.log(`Image Path: ${imgPath}`);
+        const imgBase64 = await fileToBase64(imgPath);
+        console.log(`Image Base64: ${imgBase64.substring(0, 30)}...`);
+        const result = await addProduct({ name, price, inventory, category, description, imgBase64 });
+        console.log(`Database Result: ${JSON.stringify(result)}`);
+        res.status(200).json({ message: "Product added successfully", data: result });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+};
 module.exports = {
     getHomePage,
     handleLogin,
@@ -288,5 +385,11 @@ module.exports = {
     getProductTea,
     getProductOther,
     handleDeleteProduct,
-    createOrder
+    createOrder,
+    getProductCoffeeSorted,
+    searchProductsByName,
+    getProductTeaSorted,
+    getProductOtherSorted,
+    handleUpdateProduct,
+    handleAddProduct
 }

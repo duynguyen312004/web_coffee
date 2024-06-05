@@ -34,6 +34,7 @@ function renderProducts(products) {
         container.innerHTML += productElement;
     });
 }
+
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }

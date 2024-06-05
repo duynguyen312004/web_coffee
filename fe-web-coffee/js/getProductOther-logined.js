@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadCartDropdown();
     updateWallet();
-    document.querySelector('.dropdown-action[onclick="logout()"]').addEventListener('click', logout);
     axios.get('http://localhost:8080/api/getProductOther') // Thay URL bằng API endpoint thực tế của bạn
         .then(response => {
             const allProducts = response.data;
@@ -39,12 +38,12 @@ function renderProducts(products) {
 function updateWallet() {
     const customerData = JSON.parse(sessionStorage.getItem('customer'));
     if (customerData && customerData.wallet) {
-        document.getElementById('Wallet').textContent = "Ví của tôi: " + customerData.wallet + ' Đ';
+        document.getElementById('Wallet').textContent = "Ví của tôi: " + formatPrice(customerData.wallet) + ' Đ';
     }
 }
 
 function formatPrice(price) {
-    return parseInt(price * 1000).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '').trim();
+    return parseInt(price).toLocaleString('vi-VN');
 }
 
 function loadCartDropdown() {
