@@ -71,13 +71,20 @@ function displayOrderHistory(orders) {
     }
 
     orders.forEach(order => {
+        let totalOrderValue = 0;
+
         let orderHTML = `
-            <div class="purchase-details">
-                <h4>Đơn hàng ngày ${new Date(order.date).toLocaleString('vi-VN')}</h4>
-                <div class="row row-cols-1 row-cols-md-1">
+            <div class="purchase-details-container">
+                <div class="purchase-date" onclick="toggleDetails(this)">
+                    Đơn hàng lúc ${new Date(order.date).toLocaleString('vi-VN')}
+                </div>
+                <div class="purchase-details">
+                    <div class="row row-cols-1 row-cols-md-1">
         `;
 
         order.details.forEach(detail => {
+            totalOrderValue += detail.unit_price * detail.quantity;
+
             orderHTML += `
                 <div class="col-10">
                     <div class="purchased-item">
@@ -99,6 +106,10 @@ function displayOrderHistory(orders) {
         });
 
         orderHTML += `
+                    </div>
+                    <div class="total-order-value">
+                        Tổng giá trị đơn hàng: ${formatPrice(totalOrderValue)} đ
+                    </div>
                 </div>
             </div>
         `;
@@ -107,6 +118,21 @@ function displayOrderHistory(orders) {
     });
 }
 
+function toggleDetails(element) {
+    const selectedContainer = element.closest('.purchase-details-container');
+    const purchaseHistory = document.getElementById("purchase-history");
+    const isAlreadyAtTop = purchaseHistory.firstChild === selectedContainer;
+    const detailsElement = selectedContainer.querySelector('.purchase-details');
+
+    if (detailsElement.style.display === 'block') {
+        detailsElement.style.display = 'none';
+    } else {
+        detailsElement.style.display = 'block';
+        if (!isAlreadyAtTop) {
+            purchaseHistory.prepend(selectedContainer);
+        }
+    }
+}
 
 function logout() {
     sessionStorage.clear();

@@ -26,6 +26,7 @@ CREATE TABLE product (
     category varchar(50),
     inventory integer NOT NULL,
     img_path text,
+    img_name VARCHAR(225),
     description text
 );
 

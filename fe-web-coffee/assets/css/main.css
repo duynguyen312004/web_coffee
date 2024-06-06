@@ -2098,6 +2098,7 @@ a.profile-menu__link:hover {
 }
 
 .user-info {
+  height: 700px;
   padding: 20px;
   border-radius: 20px;
   background: #fff;
@@ -3428,6 +3429,7 @@ a.profile-menu__link:hover {
   list-style-type: none;
   padding: 0;
   margin: 20px 0;
+  overflow: scroll;
 }
 
 .purchase-date {
@@ -3445,11 +3447,10 @@ a.profile-menu__link:hover {
 
 .purchase-details {
   margin: 5px 15px;
-  max-height: 0;
-  opacity: 0;
+  height: 50;
+  opacity: 100;
   transform: translateY(-10px);
   transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
-  overflow: hidden;
 }
 .purchase-details.active {
   max-height: 600px;
