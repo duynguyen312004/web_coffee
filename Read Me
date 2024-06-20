@@ -1,3 +1,5 @@
-Đầu tiên, cd vào thư mục scripts trong be-web-coffee rồi chạy trong terminal Node updateImageName.js
+
+Đầu tiên tạo database theo file Database web coffee.sql
+Sau đó cd vào thư mục scripts trong be-web-coffee rồi chạy trong terminal Node updateImageName.js
 Sau đó chạy be npm start 
 Live on Server thư mục index.html
