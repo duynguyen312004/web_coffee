@@ -1,4 +1,4 @@
 Đầu tiên tạo database theo file Database web coffee.sql. config databse nhìn trong file database.js ở thư mục config
-Sau đó cd vào thư mục scripts trong be-web-coffee chay npm i, rồi chạy trong terminal Node updateImageName.js
+Sau đó cd be-web-coffee rồi chạy trong terminal npm i, npm start,  Node updateImageName.js
 Sau đó chạy be npm start 
 Live on Server thư mục index.html
